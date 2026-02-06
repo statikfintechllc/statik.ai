@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/storage/episodes",
+  "title": "Episode",
+  "description": "Timestamped episodic memory entry",
+  "type": "object",
+  "required": ["id", "timestamp", "context", "salience"],
+  "properties": {
+    "id":        { "type": "string" },
+    "timestamp": { "type": "number" },
+    "context":   { "type": "object" },
+    "salience":  { "type": "number", "minimum": 0, "maximum": 1 },
+    "tags":      { "type": "array", "items": { "type": "string" } }
+  }
+}

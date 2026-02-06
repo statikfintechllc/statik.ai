@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/messages/action",
+  "title": "Action",
+  "description": "An executable action proposed by ie.u",
+  "type": "object",
+  "required": ["id", "timestamp", "type", "target"],
+  "properties": {
+    "id":         { "type": "string" },
+    "timestamp":  { "type": "number" },
+    "type":       { "type": "string", "enum": ["ui.update", "storage.write", "network.fetch"] },
+    "target":     { "type": "string" },
+    "params":     { "type": "object" },
+    "prediction": { "type": "object" },
+    "outcome":    { "type": "object" }
+  }
+}

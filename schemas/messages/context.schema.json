@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/messages/context",
+  "title": "ContextFrame",
+  "description": "Normalised perception frame emitted by pce.u",
+  "type": "object",
+  "required": ["id", "timestamp", "source", "tokens", "intent", "novelty", "urgency"],
+  "properties": {
+    "id":        { "type": "string" },
+    "timestamp": { "type": "number" },
+    "source":    { "type": "string" },
+    "tokens":    { "type": "array", "items": { "type": "string" } },
+    "intent":    { "type": "string", "enum": ["query", "command", "statement", "unknown"] },
+    "novelty":   { "type": "number", "minimum": 0, "maximum": 1 },
+    "urgency":   { "type": "number", "minimum": 0, "maximum": 1 },
+    "metadata":  { "type": "object" }
+  }
+}

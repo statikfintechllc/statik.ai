@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/messages/memory",
+  "title": "MemoryRecord",
+  "description": "A stored memory entry (episodic, semantic, or procedural)",
+  "type": "object",
+  "required": ["id", "timestamp", "kind", "content"],
+  "properties": {
+    "id":        { "type": "string" },
+    "timestamp": { "type": "number" },
+    "kind":      { "type": "string", "enum": ["episodic", "semantic", "procedural"] },
+    "content":   { "type": "object" },
+    "salience":  { "type": "number", "minimum": 0, "maximum": 1 },
+    "tags":      { "type": "array", "items": { "type": "string" } }
+  }
+}

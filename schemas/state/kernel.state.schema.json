@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/state/kernel",
+  "title": "KernelState",
+  "description": "Top-level system state",
+  "type": "object",
+  "required": ["boot_count", "version"],
+  "properties": {
+    "boot_count": { "type": "integer", "minimum": 0 },
+    "uptime":     { "type": "number" },
+    "crashes":    { "type": "array", "items": { "type": "object" } },
+    "version":    { "type": "string" }
+  }
+}

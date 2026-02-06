@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/state/unit",
+  "title": "UnitState",
+  "description": "Persisted state for a single cognitive unit",
+  "type": "object",
+  "required": ["unit_id", "status", "last_updated"],
+  "properties": {
+    "unit_id":      { "type": "string" },
+    "status":       { "type": "string", "enum": ["idle", "running", "paused", "error"] },
+    "state_data":   { "type": "object" },
+    "last_updated": { "type": "number" }
+  }
+}
