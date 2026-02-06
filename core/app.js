@@ -7,6 +7,7 @@ import system from './system.js';
 import storage from './storage.js';
 import runtime from './agent.js';
 import hardware from './hardware.js';
+import scheduler from './scheduler.js';
 
 class Application {
     constructor() {
@@ -33,9 +34,11 @@ class Application {
             await storage.initialize();
             await hardware.initialize();
             await runtime.initialize();
+            await scheduler.initialize();
             
-            // Start hardware monitoring
+            // Start background services
             hardware.startMonitoring(2000);
+            scheduler.start();
             
             // Update UI
             this.updateDashboard();
@@ -220,6 +223,7 @@ window.CSA = {
     storage,
     hardware,
     runtime,
+    scheduler,
     
     // Utility functions
     info: () => app.getSystemInfo(),

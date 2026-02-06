@@ -5,6 +5,7 @@
  */
 
 import storage from './storage.js';
+import AgentBrain from './brain.js';
 
 class Agent {
     constructor(id, config = {}) {
@@ -16,6 +17,7 @@ class Agent {
         this.memory = new Map();
         this.worker = null;
         this.config = config;
+        this.brain = new AgentBrain(id);
     }
 
     async initialize() {
@@ -30,12 +32,27 @@ class Agent {
         this.lastActive = Date.now();
         await this.persist();
 
+        const startTime = performance.now();
+
         try {
+            // Use brain to analyze and plan
+            const plan = this.brain.planExecution(task);
+            console.log(`[Agent ${this.id}] Execution plan created:`, plan.strategy);
+            
             const result = await this.processTask(task);
+            
+            const duration = performance.now() - startTime;
+            
+            // Learn from execution
+            this.brain.learn(task, result, duration);
+            
             this.status = 'idle';
             await this.persist();
             return result;
         } catch (error) {
+            const duration = performance.now() - startTime;
+            this.brain.learn(task, { success: false, error: error.message }, duration);
+            
             this.status = 'error';
             await this.persist();
             throw error;
