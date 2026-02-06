@@ -1,0 +1,18 @@
+{
+  "cpu": {
+    "max_per_unit_ms": 50,
+    "max_total_percent": 80
+  },
+  "memory": {
+    "max_indexeddb_mb": 100,
+    "max_opfs_mb": 500
+  },
+  "messages": {
+    "max_queue_depth": 1000,
+    "max_throughput_per_sec": 100
+  },
+  "storage": {
+    "warn_percent": 80,
+    "critical_percent": 95
+  }
+}

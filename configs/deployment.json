@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "targets": {
+    "github_pages": {
+      "enabled": false,
+      "repo": null,
+      "branch": "gh-pages",
+      "cname": null
+    },
+    "ipfs": {
+      "enabled": false,
+      "gateway": "https://ipfs.io",
+      "pinService": null
+    },
+    "ish": {
+      "enabled": false,
+      "port": 8080,
+      "autoStart": false
+    }
+  },
+  "dns": {
+    "ens": { "enabled": false, "name": null },
+    "hns": { "enabled": false, "name": null },
+    "nostr": { "enabled": false, "relays": [] },
+    "mdns": { "enabled": true, "domain": "statik.local" }
+  },
+  "mesh": {
+    "autoConnect": true,
+    "maxPeers": 10,
+    "syncScope": "selective"
+  }
+}

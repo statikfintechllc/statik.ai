@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statik://schemas/storage/skills",
+  "title": "Skill",
+  "description": "Procedural knowledge – learned action sequences",
+  "type": "object",
+  "required": ["id", "name", "procedure", "success_rate"],
+  "properties": {
+    "id":           { "type": "string" },
+    "name":         { "type": "string" },
+    "procedure":    { "type": "array", "items": { "type": "string" } },
+    "success_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+    "last_used":    { "type": "number" }
+  }
+}
