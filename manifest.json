@@ -1,0 +1,44 @@
+{
+  "name": "CSA.OS - Client Side Agent Operating System",
+  "short_name": "CSA.OS",
+  "description": "Lightweight AI Agent System with System-Level Access",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities", "development"],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "System Dashboard",
+      "url": "/",
+      "description": "View system status and agents"
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
