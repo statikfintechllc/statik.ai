@@ -10,6 +10,8 @@
  * Heavy I/O offloaded to memory.worker.js
  */
 
+import { shortId } from '../utils/id.js';
+
 export class CoreMemoryUnit {
   constructor(bus) {
     this.bus = bus;
@@ -26,7 +28,7 @@ export class CoreMemoryUnit {
   /** Store a context frame as an episodic memory */
   store(context) {
     const record = {
-      id: `mem_${Date.now()}`,
+      id: `mem_${shortId()}`,
       timestamp: Date.now(),
       kind: 'episodic',
       content: context,

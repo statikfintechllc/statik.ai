@@ -42,7 +42,7 @@ export class Scheduler {
     };
 
     if (typeof requestIdleCallback === 'function') {
-      requestIdleCallback(run, { timeout: task.deadline - Date.now() });
+      requestIdleCallback(run, { timeout: Math.max(0, task.deadline - Date.now()) });
     } else {
       setTimeout(run, 0);
     }

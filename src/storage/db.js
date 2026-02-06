@@ -26,9 +26,9 @@ const DB_CONFIGS = {
   statik_logs: {
     version: 1,
     stores: {
-      deltas:  { keyPath: 'timestamp' },
-      errors:  { keyPath: 'timestamp' },
-      actions: { keyPath: 'timestamp' },
+      deltas:  { autoIncrement: true },
+      errors:  { autoIncrement: true },
+      actions: { autoIncrement: true },
     },
   },
 };

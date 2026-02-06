@@ -37,9 +37,15 @@ export class VFS {
     return this.opfs.write(path, content);
   }
 
-  /** Check if a file exists */
+  /** Check if a file exists (cache and OPFS only, no network fetch) */
   async exists(path) {
-    return this.cache.has(path) || (await this.read(path)) !== null;
+    if (this.cache.has(path)) return true;
+    const content = await this.opfs.read(path);
+    if (content !== null) {
+      this.cache.set(path, content);
+      return true;
+    }
+    return false;
   }
 
   /** List files in a directory */

@@ -7,11 +7,11 @@
 import { PerceptionUnit } from '../../src/units/pce.u.js';
 import { Bus } from '../../src/bus/bus.u.js';
 
-// TODO: replace with test runner of choice (e.g. native Node test runner)
+let _failed = false;
 
 function test(name, fn) {
   try { fn(); console.log(`  ✓ ${name}`); }
-  catch (e) { console.error(`  ✗ ${name}:`, e.message); }
+  catch (e) { console.error(`  ✗ ${name}:`, e.message); _failed = true; }
 }
 
 function assert(condition, msg) { if (!condition) throw new Error(msg); }
@@ -50,3 +50,5 @@ test('scores novelty for new inputs', () => {
   const frame2 = pce.encode('first input');
   assert(frame2.novelty === 0, 'duplicate should not be novel');
 });
+
+if (_failed) process.exitCode = 1;

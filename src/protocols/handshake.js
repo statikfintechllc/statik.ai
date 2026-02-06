@@ -17,20 +17,24 @@ export class Handshake {
   /** Initiate handshake with a unit (returns promise) */
   initiate(unitId, config, timeoutMs = 10000) {
     return new Promise((resolve, reject) => {
+      const handler = (msg) => {
+        if (msg.unitId === unitId) {
+          clearTimeout(timer);
+          unsubscribe();
+          this.pending.delete(unitId);
+          resolve({ unitId, timestamp: Date.now() });
+        }
+      };
+
+      const unsubscribe = this.bus.on('unit.ready', handler);
+
       const timer = setTimeout(() => {
+        unsubscribe();
         this.pending.delete(unitId);
         reject(new Error(`Handshake timeout: ${unitId}`));
       }, timeoutMs);
 
       this.pending.set(unitId, { resolve, timer });
-
-      this.bus.on('unit.ready', (msg) => {
-        if (msg.unitId === unitId) {
-          clearTimeout(timer);
-          this.pending.delete(unitId);
-          resolve({ unitId, timestamp: Date.now() });
-        }
-      });
 
       this.bus.emit('unit.init', { unitId, config });
     });

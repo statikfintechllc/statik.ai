@@ -6,9 +6,11 @@
 
 import { Bus } from '../../src/bus/bus.u.js';
 
+let _failed = false;
+
 function test(name, fn) {
   try { fn(); console.log(`  ✓ ${name}`); }
-  catch (e) { console.error(`  ✗ ${name}:`, e.message); }
+  catch (e) { console.error(`  ✗ ${name}:`, e.message); _failed = true; }
 }
 
 function assert(condition, msg) { if (!condition) throw new Error(msg); }
@@ -42,3 +44,5 @@ test('unsubscribe works', () => {
   bus.emit('unsub.test', {});
   assert(count === 1, 'should only fire once after unsubscribe');
 });
+
+if (_failed) process.exitCode = 1;

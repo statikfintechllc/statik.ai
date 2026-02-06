@@ -37,6 +37,9 @@ export class Bus {
     this._record(msg);
     const subs = this.listeners.get(topic);
     if (subs) subs.forEach((cb) => cb(msg.payload, msg));
+    // Notify wildcard ('*') subscribers for all topics
+    const wildcardSubs = this.listeners.get('*');
+    if (wildcardSubs) wildcardSubs.forEach((cb) => cb(msg.payload, msg));
   }
 
   /** Request/response pattern (returns a Promise) */

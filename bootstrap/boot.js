@@ -13,8 +13,6 @@ import { detect } from './detect.js';
 import { hydrate } from './hydrate.js';
 import { recover } from './recover.js';
 
-const BOOT_PHASES = ['detect', 'init', 'hydrate', 'wake', 'ready'];
-
 export async function boot() {
   const status = { phase: null, error: null, capabilities: null };
 

@@ -7,10 +7,10 @@
  */
 
 export class WebRTCMesh {
-  constructor() {
+  constructor(config = {}) {
     this.peers = new Map(); // peerId → { pc, channel }
     this.config = {
-      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+      iceServers: config.iceServers || [],
     };
   }
 

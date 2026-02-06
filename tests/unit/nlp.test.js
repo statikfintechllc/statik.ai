@@ -7,9 +7,11 @@
 import { NLPUnit } from '../../src/units/nlp.u.js';
 import { Bus } from '../../src/bus/bus.u.js';
 
+let _failed = false;
+
 function test(name, fn) {
   try { fn(); console.log(`  ✓ ${name}`); }
-  catch (e) { console.error(`  ✗ ${name}:`, e.message); }
+  catch (e) { console.error(`  ✗ ${name}:`, e.message); _failed = true; }
 }
 
 function assert(condition, msg) { if (!condition) throw new Error(msg); }
@@ -44,3 +46,5 @@ test('handles missing template gracefully', () => {
   const msg = nlp.compose('nonexistent');
   assert(msg.includes('no template'), 'should return fallback');
 });
+
+if (_failed) process.exitCode = 1;

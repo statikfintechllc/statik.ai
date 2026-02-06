@@ -38,9 +38,21 @@ async function loadSavedState() {
       }
       const tx = db.transaction('kernel_state', 'readonly');
       const store = tx.objectStore('kernel_state');
-      const get = store.get('current');
-      get.onsuccess = () => { db.close(); resolve(get.result || null); };
-      get.onerror = () => { db.close(); resolve(null); };
+      const getAll = store.getAll();
+      getAll.onsuccess = () => {
+        const results = getAll.result;
+        let latest = null;
+        if (Array.isArray(results) && results.length > 0) {
+          latest = results.reduce((acc, item) => {
+            if (!item || typeof item.boot_count !== 'number') return acc || null;
+            if (!acc || typeof acc.boot_count !== 'number') return item;
+            return item.boot_count > acc.boot_count ? item : acc;
+          }, null);
+        }
+        db.close();
+        resolve(latest || null);
+      };
+      getAll.onerror = () => { db.close(); resolve(null); };
     };
   });
 }

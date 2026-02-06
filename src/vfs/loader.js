@@ -17,20 +17,18 @@ export class ModuleLoader {
     if (!source) throw new Error(`Module not found: ${path}`);
     const blob = new Blob([source], { type: 'application/javascript' });
     const url = URL.createObjectURL(blob);
-    try {
-      const mod = await import(url);
-      this.loaded.set(path, { url, module: mod });
-      return mod;
-    } finally {
-      // URL can be revoked after import resolves
-      URL.revokeObjectURL(url);
-    }
+    const mod = await import(url);
+    this.loaded.set(path, { url, module: mod });
+    return mod;
   }
 
-  /** Reload a previously loaded module */
+  /** Reload a previously loaded module (revokes old blob URL) */
   async reload(path) {
     const prev = this.loaded.get(path);
-    if (prev) this.loaded.delete(path);
+    if (prev) {
+      URL.revokeObjectURL(prev.url);
+      this.loaded.delete(path);
+    }
     return this.load(path);
   }
 }

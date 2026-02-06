@@ -2,28 +2,23 @@
 
 ## Message Structure
 
-All inter-unit messages follow this shape:
+All inter-unit messages on the bus follow this shape:
 
 ```json
 {
-  "id": "msg_xxxxx",
-  "timestamp": 1738777200,
-  "type": "request | response | event | stream",
-  "source": "unit.name",
-  "target": "unit.name | broadcast",
-  "channel": "high | default | low",
+  "id": "m4g5h_a1b2",
+  "timestamp": 1738777200000,
+  "topic": "context.frame",
   "payload": {
-    "method": "...",
-    "params": {},
-    "data": {}
-  },
-  "metadata": {
-    "timeout": 5000,
-    "retries": 3,
-    "trace": true
+    "...": "topic-specific data"
   }
 }
 ```
+
+The `id` is a unique sortable identifier (timestamp base-36 + random suffix).  
+The `timestamp` is Unix epoch in **milliseconds**.  
+The `topic` determines which subscribers receive the message.  
+The `payload` is the topic-specific data object.
 
 ## Channels
 

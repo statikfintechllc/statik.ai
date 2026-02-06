@@ -10,11 +10,14 @@
  *   - Backup (replicate state across instances)
  */
 
+const DEFAULT_ICE_SERVERS = [];
+
 export class MeshUnit {
-  constructor(bus) {
+  constructor(bus, config = {}) {
     this.bus = bus;
     this.id = 'mesh.u';
     this.connections = new Map(); // peerId → RTCPeerConnection
+    this.iceServers = config.iceServers || DEFAULT_ICE_SERVERS;
   }
 
   init() {
@@ -27,7 +30,7 @@ export class MeshUnit {
     if (typeof RTCPeerConnection === 'undefined') return null;
 
     const pc = new RTCPeerConnection({
-      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+      iceServers: this.iceServers,
     });
 
     const dataChannel = pc.createDataChannel('statik_mesh');

@@ -23,10 +23,23 @@ const MIGRATIONS = [
   // }
 ];
 
+/** Compare two semver strings. Returns -1, 0, or 1. */
+function compareSemver(a, b) {
+  const pa = a.split('.').map(Number);
+  const pb = b.split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    const va = pa[i] || 0;
+    const vb = pb[i] || 0;
+    if (va < vb) return -1;
+    if (va > vb) return 1;
+  }
+  return 0;
+}
+
 /** Run all pending migrations between two versions */
 export async function runMigrations(db, fromVersion, toVersion) {
   const pending = MIGRATIONS.filter(
-    (m) => m.from >= fromVersion && m.to <= toVersion
+    (m) => compareSemver(m.from, fromVersion) >= 0 && compareSemver(m.to, toVersion) <= 0
   );
 
   for (const migration of pending) {

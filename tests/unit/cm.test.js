@@ -7,9 +7,11 @@
 import { CoreMemoryUnit } from '../../src/units/cm.u.js';
 import { Bus } from '../../src/bus/bus.u.js';
 
+let _failed = false;
+
 function test(name, fn) {
   try { fn(); console.log(`  ✓ ${name}`); }
-  catch (e) { console.error(`  ✗ ${name}:`, e.message); }
+  catch (e) { console.error(`  ✗ ${name}:`, e.message); _failed = true; }
 }
 
 function assert(condition, msg) { if (!condition) throw new Error(msg); }
@@ -41,3 +43,5 @@ test('forgets a memory by id', () => {
   const results = cm.query(['test']);
   assert(results.length === 0, 'should find 0 after forget');
 });
+
+if (_failed) process.exitCode = 1;

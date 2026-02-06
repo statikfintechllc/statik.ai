@@ -7,6 +7,8 @@
  * Pipeline: raw input → tokenise → tag intent → score novelty → emit
  */
 
+import { shortId } from '../utils/id.js';
+
 export class PerceptionUnit {
   constructor(bus) {
     this.bus = bus;
@@ -26,7 +28,7 @@ export class PerceptionUnit {
     const novelty = this._scoreNovelty(tokens);
 
     const frame = {
-      id: `ctx_${Date.now()}`,
+      id: `ctx_${shortId()}`,
       timestamp: Date.now(),
       source: this.id,
       tokens,
