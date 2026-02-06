@@ -1,0 +1,27 @@
+{
+  "_comment": "Populated at runtime by bootstrap/detect.js",
+  "timestamp": null,
+  "platform": null,
+  "apis": {
+    "serviceWorker": false,
+    "opfs": false,
+    "webgpu": false,
+    "sharedArrayBuffer": false,
+    "indexedDB": false,
+    "notifications": false,
+    "geolocation": false,
+    "camera": false,
+    "vibration": false,
+    "webCrypto": false,
+    "broadcastChannel": false,
+    "webRTC": false
+  },
+  "hardware": {
+    "cores": 1,
+    "deviceMemory": null
+  },
+  "storage": {
+    "quota": null,
+    "usage": null
+  }
+}

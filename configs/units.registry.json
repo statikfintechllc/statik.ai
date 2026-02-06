@@ -1,0 +1,22 @@
+{
+  "version": "0.1.0",
+  "units": [
+    { "id": "pce.u", "file": "src/units/pce.u.js", "label": "Perception & Context Encoder", "phase": 2, "depends": [] },
+    { "id": "as.u",  "file": "src/units/as.u.js",  "label": "Attention & Salience",         "phase": 2, "depends": ["pce.u"] },
+    { "id": "ti.u",  "file": "src/units/ti.u.js",  "label": "Temporal Integrator",          "phase": 2, "depends": ["as.u"] },
+    { "id": "cm.u",  "file": "src/units/cm.u.js",  "label": "Core Memory",                  "phase": 2, "depends": ["ti.u"] },
+    { "id": "nlp.u", "file": "src/units/nlp.u.js", "label": "Natural Language Processor",   "phase": 2, "depends": ["cm.u"] },
+    { "id": "gm.u",  "file": "src/units/gm.u.js",  "label": "Goals & Motivation",           "phase": 3, "depends": ["ti.u", "cm.u"] },
+    { "id": "ee.u",  "file": "src/units/ee.u.js",  "label": "Evaluation & Error",           "phase": 3, "depends": ["gm.u"] },
+    { "id": "dbt.u", "file": "src/units/dbt.u.js", "label": "Delta & Learning Ledger",      "phase": 3, "depends": ["ee.u"] },
+    { "id": "sa.u",  "file": "src/units/sa.u.js",  "label": "Self Model & Awareness",       "phase": 3, "depends": ["cm.u", "gm.u"] },
+    { "id": "ie.u",  "file": "src/units/ie.u.js",  "label": "Intent Execution",             "phase": 2, "depends": ["gm.u"] },
+    { "id": "ec.u",  "file": "src/units/ec.u.js",  "label": "Constraints & Ethics",         "phase": 2, "depends": [] },
+    { "id": "hc.u",  "file": "src/units/hc.u.js",  "label": "Homeostasis",                  "phase": 3, "depends": ["cm.u"] },
+    { "id": "sync.u","file": "src/units/sync.u.js","label": "Sync & Federation",            "phase": 5, "depends": [] },
+    { "id": "ui.u",  "file": "src/units/ui.u.js",  "label": "User Interface",               "phase": 1, "depends": [] },
+    { "id": "telemetry.u", "file": "src/units/telemetry.u.js", "label": "Observability", "phase": 3, "depends": [] },
+    { "id": "dev.u", "file": "src/units/dev.u.js", "label": "Developer Tools",              "phase": 4, "depends": [] }
+  ],
+  "bootOrder": ["pce.u","as.u","ti.u","cm.u","nlp.u","gm.u","ee.u","dbt.u","sa.u","ie.u","ec.u","hc.u","ui.u"]
+}
