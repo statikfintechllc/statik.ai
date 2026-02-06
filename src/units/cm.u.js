@@ -61,6 +61,12 @@ export class CoreMemoryUnit {
   _persistRecord(record) {
     if (typeof indexedDB === 'undefined') return;
     const req = indexedDB.open('statik_memory', 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('episodes')) {
+        db.createObjectStore('episodes', { keyPath: 'id' });
+      }
+    };
     req.onsuccess = () => {
       const db = req.result;
       try {
@@ -77,6 +83,12 @@ export class CoreMemoryUnit {
   _deleteRecord(id) {
     if (typeof indexedDB === 'undefined') return;
     const req = indexedDB.open('statik_memory', 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('episodes')) {
+        db.createObjectStore('episodes', { keyPath: 'id' });
+      }
+    };
     req.onsuccess = () => {
       const db = req.result;
       try {

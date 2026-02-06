@@ -90,7 +90,9 @@ export class Kernel {
       const manifest = await res.json();
       this.registry.load(manifest);
     } catch (_) {
-      /* Fallback: load inline minimal registry so system can still boot */
+      /* Fallback: inline minimal registry – core boot order only.
+         Phase 5 units (sync, disc, mesh, bridge, deploy, dns) and
+         auxiliary units (telemetry, dev) boot on-demand, not at startup. */
       this.registry.load({
         units: [],
         bootOrder: ['pce.u','as.u','ti.u','cm.u','nlp.u','gm.u','ee.u','dbt.u','sa.u','ie.u','ec.u','hc.u','ui.u'],

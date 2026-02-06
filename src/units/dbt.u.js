@@ -45,6 +45,12 @@ export class DeltaLedgerUnit {
   _persistDelta(entry) {
     if (typeof indexedDB === 'undefined') return;
     const req = indexedDB.open('statik_logs', 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('deltas')) {
+        db.createObjectStore('deltas', { autoIncrement: true });
+      }
+    };
     req.onsuccess = () => {
       const db = req.result;
       try {

@@ -63,6 +63,14 @@ export class SnapshotManager {
   async _restoreDB(name, stores) {
     return new Promise((resolve) => {
       const req = indexedDB.open(name, 1);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        for (const storeName of Object.keys(stores)) {
+          if (!db.objectStoreNames.contains(storeName)) {
+            db.createObjectStore(storeName, { keyPath: 'id' });
+          }
+        }
+      };
       req.onerror = () => resolve();
       req.onsuccess = () => {
         const db = req.result;
