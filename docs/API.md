@@ -113,3 +113,39 @@
 |--------|-------------|
 | `simulate(topic, payload)` | Inject simulated event |
 | `replay(count?)` | Replay recent messages |
+
+## Federation & Deployment Units
+
+### `disc.u` – Discovery
+| Method | Description |
+|--------|-------------|
+| `announce(instanceId, endpoints, capabilities)` | Broadcast presence |
+| `listPeers()` | Return all known peers |
+
+### `mesh.u` – P2P Mesh Networking
+| Method | Description |
+|--------|-------------|
+| `connect(peerId, signalingData)` | Connect to a peer via WebRTC |
+| `send(peerId, data)` | Send data to a peer |
+| `broadcast(data)` | Send to all connected peers |
+
+### `bridge.u` – Debug Bridge
+| Method | Description |
+|--------|-------------|
+| `connect(url)` | Connect to a debug WebSocket server |
+| `sendSnapshot(snapshot)` | Push status snapshot to debugger |
+
+### `deploy.u` – Self-Deployment
+| Method | Description |
+|--------|-------------|
+| `bundle(options?)` | Generate deployment bundle |
+| `deployToGitHub(token, repo, options?)` | Deploy to GitHub Pages |
+| `exportBundle()` | Export as downloadable JSON |
+
+### `dns.u` – Decentralised DNS
+| Method | Description |
+|--------|-------------|
+| `checkAvailability(name, system)` | Check name availability |
+| `register(name, system, endpoint)` | Register a name |
+| `resolve(name)` | Resolve name to endpoint |
+| `list()` | List all registered names |

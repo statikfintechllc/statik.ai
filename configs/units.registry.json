@@ -16,7 +16,12 @@
     { "id": "sync.u","file": "src/units/sync.u.js","label": "Sync & Federation",            "phase": 5, "depends": [] },
     { "id": "ui.u",  "file": "src/units/ui.u.js",  "label": "User Interface",               "phase": 1, "depends": [] },
     { "id": "telemetry.u", "file": "src/units/telemetry.u.js", "label": "Observability", "phase": 3, "depends": [] },
-    { "id": "dev.u", "file": "src/units/dev.u.js", "label": "Developer Tools",              "phase": 4, "depends": [] }
+    { "id": "dev.u", "file": "src/units/dev.u.js", "label": "Developer Tools",              "phase": 4, "depends": [] },
+    { "id": "disc.u",   "file": "src/units/disc.u.js",   "label": "Discovery",            "phase": 5, "depends": ["sync.u"] },
+    { "id": "mesh.u",   "file": "src/units/mesh.u.js",   "label": "P2P Mesh Networking",  "phase": 5, "depends": ["disc.u"] },
+    { "id": "bridge.u", "file": "src/units/bridge.u.js", "label": "Debug Bridge",         "phase": 5, "depends": [] },
+    { "id": "deploy.u", "file": "src/units/deploy.u.js", "label": "Self-Deployment",      "phase": 5, "depends": [] },
+    { "id": "dns.u",    "file": "src/units/dns.u.js",    "label": "Decentralised DNS",    "phase": 5, "depends": ["disc.u"] }
   ],
   "bootOrder": ["pce.u","as.u","ti.u","cm.u","nlp.u","gm.u","ee.u","dbt.u","sa.u","ie.u","ec.u","hc.u","ui.u"]
 }
