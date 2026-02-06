@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "memoryType": {
+            "type": "string",
+            "enum": [
+                "episodic",
+                "semantic",
+                "procedural"
+            ]
+        },
+        "data": {
+            "type": "object"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "id",
+        "memoryType",
+        "data"
+    ]
+}

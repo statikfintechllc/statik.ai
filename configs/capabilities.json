@@ -1,0 +1,11 @@
+{
+    "webgpu": false,
+    "opfs": false,
+    "serviceWorker": false,
+    "notifications": false,
+    "geolocation": false,
+    "storageEstimate": false,
+    "webrtc": true,
+    "websocket": true,
+    "mdns": false
+}

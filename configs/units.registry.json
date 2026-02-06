@@ -1,0 +1,126 @@
+{
+  "units": [
+    {
+      "id": "pce.u",
+      "path": "src/units/pce.u.js",
+      "order": 10,
+      "dependencies": []
+    },
+    {
+      "id": "as.u",
+      "path": "src/units/as.u.js",
+      "order": 20,
+      "dependencies": [
+        "pce.u"
+      ]
+    },
+    {
+      "id": "ti.u",
+      "path": "src/units/ti.u.js",
+      "order": 30,
+      "dependencies": [
+        "as.u"
+      ]
+    },
+    {
+      "id": "cm.u",
+      "path": "src/units/cm.u.js",
+      "order": 40,
+      "dependencies": [
+        "ti.u"
+      ]
+    },
+    {
+      "id": "nlp.u",
+      "path": "src/units/nlp.u.js",
+      "order": 50,
+      "dependencies": []
+    },
+    {
+      "id": "gm.u",
+      "path": "src/units/gm.u.js",
+      "order": 60,
+      "dependencies": [
+        "ti.u",
+        "cm.u"
+      ]
+    },
+    {
+      "id": "ee.u",
+      "path": "src/units/ee.u.js",
+      "order": 70,
+      "dependencies": []
+    },
+    {
+      "id": "dbt.u",
+      "path": "src/units/dbt.u.js",
+      "order": 80,
+      "dependencies": []
+    },
+    {
+      "id": "sa.u",
+      "path": "src/units/sa.u.js",
+      "order": 90,
+      "dependencies": []
+    },
+    {
+      "id": "ie.u",
+      "path": "src/units/ie.u.js",
+      "order": 100,
+      "dependencies": [
+        "gm.u",
+        "ec.u"
+      ]
+    },
+    {
+      "id": "ec.u",
+      "path": "src/units/ec.u.js",
+      "order": 5,
+      "dependencies": []
+    },
+    {
+      "id": "hc.u",
+      "path": "src/units/hc.u.js",
+      "order": 110,
+      "dependencies": []
+    },
+    {
+      "id": "ui.u",
+      "path": "src/units/ui.u.js",
+      "order": 120,
+      "dependencies": []
+    },
+    {
+      "id": "mesh.u",
+      "path": "src/units/mesh.u.js",
+      "order": 130,
+      "dependencies": []
+    },
+    {
+      "id": "disc.u",
+      "path": "src/units/disc.u.js",
+      "order": 135,
+      "dependencies": [
+        "mesh.u"
+      ]
+    },
+    {
+      "id": "bridge.u",
+      "path": "src/units/bridge.u.js",
+      "order": 140,
+      "dependencies": []
+    },
+    {
+      "id": "deploy.u",
+      "path": "src/units/deploy.u.js",
+      "order": 150,
+      "dependencies": []
+    },
+    {
+      "id": "dns.u",
+      "path": "src/units/dns.u.js",
+      "order": 160,
+      "dependencies": []
+    }
+  ]
+}
