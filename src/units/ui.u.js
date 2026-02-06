@@ -23,8 +23,13 @@ export default class UIUnit {
         // Listen for internal thoughts (tracing)
         this.bus.subscribe('*', (msg) => {
             if (msg.type.startsWith('context.') || msg.type === 'system.event') {
-                console.log('UI Trace:', msg); // Keep console clean-ish, user sees meaningful stuff
+                console.log('UI Trace:', msg);
             }
+        });
+
+        // Listen for system output (responses)
+        this.bus.subscribe('ui.output', (msg) => {
+            this.addMessage('Statik', msg.content);
         });
     }
 

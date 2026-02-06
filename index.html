@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,59 @@
     <title>Statik.ai</title>
     <link rel="stylesheet" href="assets/styles/base.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        // Global Error Trap for Remote Debugging
+        window.onerror = function (msg, url, line, col, error) {
+            const payload = {
+                type: 'ERROR',
+                message: msg,
+                payload: { url, line, col, stack: error ? error.stack : '' }
+            };
+            // Send to server
+            fetch('/log', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(e => { });
+
+            // Also show in UI
+            const logEl = document.getElementById('boot-log');
+            if (logEl) {
+                const line = document.createElement('div');
+                line.textContent = 'Global Error: ' + msg;
+                line.style.color = 'red';
+                logEl.appendChild(line);
+            }
+            return false;
+        };
+
+        // Console override to server
+        const originalLog = console.log;
+        console.log = function (...args) {
+            originalLog.apply(console, args);
+            // Send to server
+            fetch('/log', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: 'CONSOLE',
+                    message: args.map(a => String(a)).join(' '),
+                    payload: {}
+                })
+            }).catch(e => { });
+
+            // Show in UI
+            const logEl = document.getElementById('boot-log');
+            if (logEl) {
+                const line = document.createElement('div');
+                line.textContent = '> ' + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+                logEl.appendChild(line);
+                logEl.scrollTop = logEl.scrollHeight;
+            }
+        };
+    </script>
 </head>
+
 <body>
     <div id="root">
         <header>
@@ -19,43 +72,17 @@
         </main>
     </div>
 
-    <!-- Redirect console to UI for visualization during boot -->
-    <script>
-        const logEl = document.getElementById('boot-log');
-        const statusEl = document.getElementById('status-indicator');
-        
-        const originalLog = console.log;
-        console.log = function(...args) {
-            originalLog.apply(console, args);
-            const line = document.createElement('div');
-            line.textContent = '> ' + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
-            logEl.appendChild(line);
-            logEl.scrollTop = logEl.scrollHeight;
-        };
-
-        const originalError = console.error;
-        console.error = function(...args) {
-            originalError.apply(console, args);
-            const line = document.createElement('div');
-            line.textContent = 'ERROR: ' + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
-            line.style.color = 'red';
-            logEl.appendChild(line);
-            logEl.scrollTop = logEl.scrollHeight;
-        };
-        
-        // Listen for system ready roughly
-        // In a real app we'd use the event bus, but here we can just watch for the log or wait
-        // The UI unit will also log to console
-    </script>
-
     <script type="module">
         import { boot } from './bootstrap/boot.js';
-        
+
         // Start system
         boot().then(() => {
             document.getElementById('status-indicator').textContent = 'SYSTEM READY';
             document.getElementById('status-indicator').style.color = '#58a6ff';
+        }).catch(err => {
+            console.error("Boot failed", err);
         });
     </script>
 </body>
+
 </html>

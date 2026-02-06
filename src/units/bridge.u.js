@@ -10,11 +10,10 @@ export default class BridgeUnit {
     async onInit() {
         console.log(`${this.id} initialized`);
 
-        // Attempt to connect to debug server
+        // Connect immediately
         this.connect();
 
         // Subscribe to all system events to stream them
-        // Note: In a real app we might filter high volume events
         this.bus.subscribe('*', (msg) => {
             if (this.connected) {
                 this.sendToDebugger({
@@ -26,22 +25,26 @@ export default class BridgeUnit {
     }
 
     connect() {
-        // Simple WebSocket connection stub for now
-        if ('WebSocket' in window) {
-            try {
-                // We won't actually auto-connect in this demo to avoid console errors if server is missing
-                // this.socket = new WebSocket(this.debugServerUrl);
-                // this.socket.onopen = () => { ... }
-                console.log("Bridge: WebSocket capability detected. Waiting for user to trigger connection.");
-            } catch (e) {
-                console.error("Bridge connection failed", e);
-            }
-        }
+        console.log("Bridge: Connecting to Live Log Server...");
+        this.connected = true;
     }
 
     sendToDebugger(data) {
-        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-            this.socket.send(JSON.stringify(data));
-        }
+        if (!this.connected) return;
+
+        // Use simple fetch POST to send logs to our python server
+        fetch('/log', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                type: data.type,
+                message: data.payload.content || 'Event',
+                payload: data.payload
+            })
+        }).catch(err => {
+            // console.error("Bridge send failed", err);
+        });
     }
 }
