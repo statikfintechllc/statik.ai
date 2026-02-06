@@ -1,0 +1,50 @@
+/**
+ * inspector.css – System inspection panel styles
+ */
+
+#inspector {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 360px;
+  height: 100%;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.inspector-section {
+  margin-bottom: 1.5rem;
+}
+
+.inspector-section h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.inspector-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.inspector-metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+
+.inspector-metric .label {
+  color: #888;
+}
+
+.inspector-metric .value {
+  color: var(--fg);
+  font-family: var(--mono);
+}
