@@ -5,6 +5,7 @@ import sys
 import os
 
 PORT = 8080
+COMMAND_QUEUE = []
 
 class LogHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
@@ -21,6 +22,21 @@ class LogHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
 
+    def do_GET(self):
+        if self.path == '/cmd':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            
+            cmd = None
+            if COMMAND_QUEUE:
+                cmd = COMMAND_QUEUE.pop(0)
+                print(f"[SERVER] Sending command to client: {cmd}")
+            
+            self.wfile.write(json.dumps({"command": cmd}).encode('utf-8'))
+        else:
+            super().do_GET()
+
     def do_POST(self):
         if self.path == '/log':
             content_length = int(self.headers['Content-Length'])
@@ -33,6 +49,21 @@ class LogHandler(http.server.SimpleHTTPRequestHandler):
             except Exception as e:
                 print(f"Error parsing log: {e}")
             
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b'{"status":"ok"}')
+        elif self.path == '/admin/cmd':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            try:
+                data = json.loads(post_data.decode('utf-8'))
+                cmd = data.get('cmd')
+                if cmd:
+                    COMMAND_QUEUE.append(cmd)
+                    print(f"[ADMIN] Queued command: {cmd}")
+            except Exception as e:
+                print(f"Error parsing admin cmd: {e}")
+
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b'{"status":"ok"}')
