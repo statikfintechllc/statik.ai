@@ -1,0 +1,38 @@
+{
+  "name": "csa-os",
+  "version": "0.1.0",
+  "description": "Client Side Agent Operating System - Lightweight AI Agent System with System-Level Access",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "start:node": "npx http-server -p 8000 --cors",
+    "lint": "echo 'No linter configured - zero dependencies'",
+    "test": "echo 'Test infrastructure not yet implemented'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/statikfintechllc/statik.ai.git"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "pwa",
+    "webassembly",
+    "ios",
+    "developer-mode",
+    "opfs",
+    "service-worker",
+    "zero-dependencies"
+  ],
+  "author": "StatikFinTech Intelligence",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/statikfintechllc/statik.ai/issues"
+  },
+  "homepage": "https://github.com/statikfintechllc/statik.ai#readme",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
