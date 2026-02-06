@@ -2,7 +2,7 @@
 
 ## StatikFinTech Intelligence Presents
 # statik.ai
-***The World's First* full Client Side Agent Architecture Operating System – *CSA.OS***
+***The World's First* full Client Side Agent Operating System – *CSA.OS***
 
 </div>
 
