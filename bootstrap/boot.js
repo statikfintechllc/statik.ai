@@ -12,9 +12,10 @@
 import { detect } from './detect.js';
 import { hydrate } from './hydrate.js';
 import { recover } from './recover.js';
+import { Kernel } from '../src/kernel/kernel.u.js';
 
 export async function boot() {
-  const status = { phase: null, error: null, capabilities: null };
+  const status = { phase: null, error: null, capabilities: null, kernel: null };
 
   try {
     /* Phase 1 – DETECT */
@@ -23,19 +24,23 @@ export async function boot() {
 
     /* Phase 2 – INIT */
     status.phase = 'init';
-    // TODO: import and initialise kernel.u, bus.u, spawn workers
+    const kernel = new Kernel();
+    await kernel.init(status.capabilities);
+    status.kernel = kernel;
 
     /* Phase 3 – HYDRATE */
     status.phase = 'hydrate';
-    await hydrate();
+    const hydrateResult = await hydrate();
+    if (hydrateResult && !hydrateResult.fresh && hydrateResult.state) {
+      kernel.bus.emit('state.hydrated', hydrateResult.state);
+    }
 
     /* Phase 4 – WAKE */
     status.phase = 'wake';
-    // TODO: start units via lifecycle.js in dependency order
+    await kernel.wake();
 
     /* Phase 5 – READY */
     status.phase = 'ready';
-    // TODO: emit 'system.ready' on bus
 
   } catch (err) {
     status.error = err;

@@ -36,7 +36,11 @@ export class Watchdog {
       if (now - last > this.timeoutMs) {
         console.warn('[watchdog] unit unresponsive:', unitId);
         this.bus.emit('unit.unresponsive', { unitId, lastSeen: last });
-        // TODO: trigger lifecycle.restart(unitId)
+        if (this.lifecycle) {
+          this.lifecycle.restart(unitId).catch((err) => {
+            console.error('[watchdog] restart failed:', unitId, err);
+          });
+        }
       }
     }
   }

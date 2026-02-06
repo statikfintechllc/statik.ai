@@ -23,7 +23,7 @@ export class DeltaLedgerUnit {
   logDelta(type, before, after, evidence) {
     const entry = { timestamp: Date.now(), type, before, after, evidence };
     this.ledger.push(entry);
-    // TODO: persist to IndexedDB statik_logs.deltas
+    this._persistDelta(entry);
     return entry;
   }
 
@@ -40,4 +40,20 @@ export class DeltaLedgerUnit {
   }
 
   destroy() {}
+
+  /** Persist a delta entry to IndexedDB */
+  _persistDelta(entry) {
+    if (typeof indexedDB === 'undefined') return;
+    const req = indexedDB.open('statik_logs', 1);
+    req.onsuccess = () => {
+      const db = req.result;
+      try {
+        const tx = db.transaction('deltas', 'readwrite');
+        tx.objectStore('deltas').add(entry);
+        tx.oncomplete = () => db.close();
+        tx.onerror = () => db.close();
+      } catch (_) { db.close(); }
+    };
+    req.onerror = () => {};
+  }
 }

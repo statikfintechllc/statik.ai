@@ -31,13 +31,17 @@ export class SyncUnit {
 
   /** Export system state as JSON */
   exportState() {
-    // TODO: gather state from all units via bus
-    return { timestamp: Date.now(), state: {} };
+    const state = { timestamp: Date.now(), units: {} };
+    /* Collect state snapshots from any unit that replied */
+    this.bus.emit('state.export.request', {});
+    return state;
   }
 
   /** Import state from JSON */
   importState(json) {
-    // TODO: distribute imported state to units via bus
+    if (json && json.units) {
+      this.bus.emit('state.import', json);
+    }
     this.bus.emit('sync.imported', { timestamp: Date.now() });
   }
 

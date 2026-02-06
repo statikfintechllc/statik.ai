@@ -39,12 +39,46 @@ export class SnapshotManager {
   async restore(snapshot) {
     if (!snapshot?.source) throw new Error('Invalid snapshot');
 
-    // Restore source files
+    /* Restore source files to VFS */
     for (const [path, content] of Object.entries(snapshot.source)) {
       await this.vfs.write(path, content);
     }
 
-    // TODO: restore state databases
-    // TODO: restore config
+    /* Restore state databases */
+    if (snapshot.state && typeof indexedDB !== 'undefined') {
+      for (const [dbName, stores] of Object.entries(snapshot.state)) {
+        await this._restoreDB(dbName, stores);
+      }
+    }
+
+    /* Restore config (re-write to VFS) */
+    if (snapshot.config) {
+      for (const [key, value] of Object.entries(snapshot.config)) {
+        await this.vfs.write(`configs/${key}.json`, JSON.stringify(value, null, 2));
+      }
+    }
+  }
+
+  /** Restore a single IndexedDB database from snapshot data */
+  async _restoreDB(name, stores) {
+    return new Promise((resolve) => {
+      const req = indexedDB.open(name, 1);
+      req.onerror = () => resolve();
+      req.onsuccess = () => {
+        const db = req.result;
+        try {
+          for (const [storeName, records] of Object.entries(stores)) {
+            if (!db.objectStoreNames.contains(storeName)) continue;
+            const tx = db.transaction(storeName, 'readwrite');
+            const store = tx.objectStore(storeName);
+            for (const record of records) {
+              store.put(record);
+            }
+          }
+        } catch (_) { /* best-effort */ }
+        db.close();
+        resolve();
+      };
+    });
   }
 }

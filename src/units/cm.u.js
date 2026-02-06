@@ -37,7 +37,7 @@ export class CoreMemoryUnit {
     };
     this.cache.push(record);
     if (this.cache.length > this.maxCache) this.cache.shift();
-    // TODO: persist to IndexedDB via memory.worker
+    this._persistRecord(record);
     this.bus.emit('memory.stored', { id: record.id });
     return record;
   }
@@ -54,7 +54,39 @@ export class CoreMemoryUnit {
   /** Mark a memory as forgotten */
   forget(id) {
     this.cache = this.cache.filter((m) => m.id !== id);
-    // TODO: remove from IndexedDB
+    this._deleteRecord(id);
+  }
+
+  /** Persist a record to IndexedDB */
+  _persistRecord(record) {
+    if (typeof indexedDB === 'undefined') return;
+    const req = indexedDB.open('statik_memory', 1);
+    req.onsuccess = () => {
+      const db = req.result;
+      try {
+        const tx = db.transaction('episodes', 'readwrite');
+        tx.objectStore('episodes').put(record);
+        tx.oncomplete = () => db.close();
+        tx.onerror = () => db.close();
+      } catch (_) { db.close(); }
+    };
+    req.onerror = () => {};
+  }
+
+  /** Remove a record from IndexedDB */
+  _deleteRecord(id) {
+    if (typeof indexedDB === 'undefined') return;
+    const req = indexedDB.open('statik_memory', 1);
+    req.onsuccess = () => {
+      const db = req.result;
+      try {
+        const tx = db.transaction('episodes', 'readwrite');
+        tx.objectStore('episodes').delete(id);
+        tx.oncomplete = () => db.close();
+        tx.onerror = () => db.close();
+      } catch (_) { db.close(); }
+    };
+    req.onerror = () => {};
   }
 
   destroy() {}

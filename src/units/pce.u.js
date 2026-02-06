@@ -17,7 +17,9 @@ export class PerceptionUnit {
   }
 
   init() {
-    // TODO: subscribe to raw input channels
+    this.bus.on('user.input', (msg) => {
+      if (msg && msg.text) this.encode(msg.text);
+    });
     this.bus.emit('unit.ready', { unitId: this.id });
   }
 
