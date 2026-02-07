@@ -61,7 +61,7 @@ export class SnapshotManager {
 
   /** Restore a single IndexedDB database from snapshot data */
   async _restoreDB(name, stores) {
-    /* Use backup.js importState if available, otherwise write directly into existing stores */
+    /* Open without version bump – write into existing stores to preserve correct schemas */
     return new Promise((resolve) => {
       /* Open without version bump – do not recreate stores with wrong schemas */
       const req = indexedDB.open(name);

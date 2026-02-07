@@ -92,8 +92,6 @@ test('request timeout rejects', async () => {
   }
 });
 
-if (_failed) process.exitCode = 1;
-
 /* Run all tests sequentially, awaiting async ones */
 (async () => {
   for (const { name, fn } of _tests) {

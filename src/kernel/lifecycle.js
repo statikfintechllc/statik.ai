@@ -105,7 +105,7 @@ export class Lifecycle {
       this.running.add(unitId);
       this.bus.emit('unit.started', { unitId, timestamp: Date.now() });
     } catch (err) {
-      /* Clean up any partially-created instance on failure */
+      /* Defensive cleanup – instance may or may not have been set */
       this.instances.delete(unitId);
       this.running.delete(unitId);
       console.error('[lifecycle] failed to start unit:', unitId, err);
