@@ -91,10 +91,18 @@
       "dependencies": []
     },
     {
+      "id": "bridge.u",
+      "path": "src/units/bridge.u.js",
+      "order": 125,
+      "dependencies": []
+    },
+    {
       "id": "mesh.u",
       "path": "src/units/mesh.u.js",
       "order": 130,
-      "dependencies": []
+      "dependencies": [
+        "bridge.u"
+      ]
     },
     {
       "id": "disc.u",
@@ -103,12 +111,6 @@
       "dependencies": [
         "mesh.u"
       ]
-    },
-    {
-      "id": "bridge.u",
-      "path": "src/units/bridge.u.js",
-      "order": 140,
-      "dependencies": []
     },
     {
       "id": "deploy.u",

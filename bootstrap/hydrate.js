@@ -10,8 +10,12 @@ export async function hydrateState() {
     const db = new StorageDB();
     try {
         await db.init();
-        // In the future, load state from db explicitly here
-        return { dbReady: true };
+        console.log("Hydrate: Database initialized");
+
+        // In the future, we would load the 'snapshot' here
+        // For now, we just ensure DB is ready for units to use
+
+        return { dbReady: true, db };
     } catch (err) {
         console.error("Hydration failed:", err);
         return { dbReady: false, error: err };

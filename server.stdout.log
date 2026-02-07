@@ -1,0 +1,1042 @@
+[SSL] Using cert: /home/statikfintechllc/builds/statik.ai/cert.pem
+[SSL] Using key:  /home/statikfintechllc/builds/statik.ai/key.pem
+[WSS] Secure WebSocket server on port 8081
+============================================================
+  Statik.ai Debug Server (HTTPS + WSS)
+============================================================
+  HTTPS:     https://localhost:8080
+  Network:   https://192.168.1.163:8080
+  WSS:       wss://192.168.1.163:8081
+  Peers:     https://localhost:8080/debug/peers
+  Cognitive: https://localhost:8080/debug/cognitive
+  Device:    https://localhost:8080/debug/device
+
+  NOTE: On iPhone, visit https://192.168.1.163:8080
+         Accept the cert warning to load.
+============================================================
+[DEVICE LOG] CONSOLE: Boot: Phase 1 - DETECT {}
+[DEVICE LOG] CONSOLE: Capabilities detected: [object Object] {}
+[DEVICE LOG] CONSOLE: Boot: Phase 2 - INITIALIZE Kernel {}
+[DEVICE LOG] CONSOLE: Boot: Phase 3 - HYDRATE {}
+[DEVICE LOG] CONSOLE: StorageDB opened successfully {}
+[DEVICE LOG] CONSOLE: Hydrate: Database initialized {}
+[DEVICE LOG] CONSOLE: Boot: Phase 4 - WAKE {}
+[DEVICE LOG] CONSOLE: Kernel: Initializing... {}
+[DEVICE LOG] CONSOLE: Unit Registry loaded: 18 units {}
+[DEVICE LOG] CONSOLE: Lifecycle: Starting boot sequence... {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ec.u... {}
+[DEVICE LOG] CONSOLE: ec.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ec.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing pce.u... {}
+[DEVICE LOG] CONSOLE: pce.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: pce.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing as.u... {}
+[DEVICE LOG] CONSOLE: as.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: as.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ti.u... {}
+[DEVICE LOG] CONSOLE: ti.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ti.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing cm.u... {}
+[DEVICE LOG] CONSOLE: cm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: cm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing nlp.u... {}
+[DEVICE LOG] CONSOLE: nlp.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: nlp.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing gm.u... {}
+[DEVICE LOG] CONSOLE: gm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: gm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ee.u... {}
+[DEVICE LOG] CONSOLE: ee.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ee.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dbt.u... {}
+[DEVICE LOG] CONSOLE: dbt.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dbt.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing sa.u... {}
+[DEVICE LOG] CONSOLE: sa.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: sa.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ie.u... {}
+[DEVICE LOG] CONSOLE: ie.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ie.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing hc.u... {}
+[DEVICE LOG] CONSOLE: hc.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: hc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ui.u... {}
+[DEVICE LOG] CONSOLE: ui.u initialized (Spatial Mode) {}
+[DEVICE LOG] CONSOLE: Lifecycle: ui.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing bridge.u... {}
+[DEVICE LOG] CONSOLE: bridge.u initialized {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WebSocket to ws://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Lifecycle: bridge.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing mesh.u... {}
+[DEVICE LOG] CONSOLE: mesh.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: mesh.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing disc.u... {}
+[DEVICE LOG] CONSOLE: disc.u initialized {}
+[DEVICE LOG] CONSOLE: Discovery: Instance ready for peer connections {}
+[DEVICE LOG] CONSOLE: Lifecycle: disc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing deploy.u... {}
+[DEVICE LOG] CONSOLE: deploy.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: deploy.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dns.u... {}
+[DEVICE LOG] CONSOLE: dns.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dns.u ready. {}
+[DEVICE LOG] BUS-EVENT: system.ready {'id': 'sys_ready_1770437978803', 'type': 'system.ready', 'timestamp': 1770437978803, 'source': 'kernel', 'content': 'All units initialized'}
+[DEVICE LOG] CONSOLE: Kernel: System ready in 1702ms {}
+[DEVICE LOG] CONSOLE: Boot: Sequence Complete {}
+[DEVICE LOG] CONSOLE: Open FS {}
+[ADMIN] Queued command: reload
+[SERVER] Sending command to client: reload
+[DEVICE LOG] CONSOLE: Boot: Phase 1 - DETECT {}
+[DEVICE LOG] CONSOLE: Capabilities detected: [object Object] {}
+[DEVICE LOG] CONSOLE: Boot: Phase 2 - INITIALIZE Kernel {}
+[DEVICE LOG] CONSOLE: Boot: Phase 3 - HYDRATE {}
+[DEVICE LOG] CONSOLE: StorageDB opened successfully {}
+[DEVICE LOG] CONSOLE: Hydrate: Database initialized {}
+[DEVICE LOG] CONSOLE: Boot: Phase 4 - WAKE {}
+[DEVICE LOG] CONSOLE: Kernel: Initializing... {}
+[DEVICE LOG] CONSOLE: Unit Registry loaded: 18 units {}
+[DEVICE LOG] CONSOLE: Lifecycle: Starting boot sequence... {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ec.u... {}
+[DEVICE LOG] CONSOLE: ec.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ec.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing pce.u... {}
+[DEVICE LOG] CONSOLE: pce.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: pce.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing as.u... {}
+[DEVICE LOG] CONSOLE: as.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: as.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ti.u... {}
+[DEVICE LOG] CONSOLE: ti.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ti.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing cm.u... {}
+[DEVICE LOG] CONSOLE: cm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: cm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing nlp.u... {}
+[DEVICE LOG] CONSOLE: nlp.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: nlp.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing gm.u... {}
+[DEVICE LOG] CONSOLE: gm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: gm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ee.u... {}
+[DEVICE LOG] CONSOLE: ee.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ee.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dbt.u... {}
+[DEVICE LOG] CONSOLE: dbt.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dbt.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing sa.u... {}
+[DEVICE LOG] CONSOLE: sa.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: sa.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ie.u... {}
+[DEVICE LOG] CONSOLE: ie.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ie.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing hc.u... {}
+[DEVICE LOG] CONSOLE: hc.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: hc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ui.u... {}
+[DEVICE LOG] CONSOLE: ui.u initialized (Spatial Mode) {}
+[DEVICE LOG] CONSOLE: Lifecycle: ui.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing bridge.u... {}
+[DEVICE LOG] CONSOLE: bridge.u initialized {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Lifecycle: bridge.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing mesh.u... {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: mesh.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: mesh.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing disc.u... {}
+[DEVICE LOG] CONSOLE: disc.u initialized {}
+[DEVICE LOG] CONSOLE: Discovery: Instance ready for peer connections {}
+[DEVICE LOG] CONSOLE: Lifecycle: disc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing deploy.u... {}
+[DEVICE LOG] CONSOLE: deploy.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: deploy.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dns.u... {}
+[DEVICE LOG] CONSOLE: dns.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dns.u ready. {}
+[DEVICE LOG] BUS-EVENT: system.ready {'id': 'sys_ready_1770438273754', 'type': 'system.ready', 'timestamp': 1770438273754, 'source': 'kernel', 'content': 'All units initialized'}
+[DEVICE LOG] CONSOLE: Kernel: System ready in 2210ms {}
+[DEVICE LOG] CONSOLE: Boot: Sequence Complete {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[WS] Connection from ('127.0.0.1', 38702)
+[WS] Peer registered: test_client_py from ('127.0.0.1', 38702)
+[WS] Peer disconnected: test_client_py
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Boot: Phase 1 - DETECT {}
+[DEVICE LOG] CONSOLE: Capabilities detected: [object Object] {}
+[DEVICE LOG] CONSOLE: Boot: Phase 2 - INITIALIZE Kernel {}
+[DEVICE LOG] CONSOLE: Boot: Phase 3 - HYDRATE {}
+[DEVICE LOG] CONSOLE: StorageDB opened successfully {}
+[DEVICE LOG] CONSOLE: Hydrate: Database initialized {}
+[DEVICE LOG] CONSOLE: Boot: Phase 4 - WAKE {}
+[DEVICE LOG] CONSOLE: Kernel: Initializing... {}
+[DEVICE LOG] CONSOLE: Unit Registry loaded: 18 units {}
+[DEVICE LOG] CONSOLE: Lifecycle: Starting boot sequence... {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ec.u... {}
+[DEVICE LOG] CONSOLE: ec.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ec.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing pce.u... {}
+[DEVICE LOG] CONSOLE: pce.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: pce.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing as.u... {}
+[DEVICE LOG] CONSOLE: as.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: as.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ti.u... {}
+[DEVICE LOG] CONSOLE: ti.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ti.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing cm.u... {}
+[DEVICE LOG] CONSOLE: cm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: cm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing nlp.u... {}
+[DEVICE LOG] CONSOLE: nlp.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: nlp.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing gm.u... {}
+[DEVICE LOG] CONSOLE: gm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: gm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ee.u... {}
+[DEVICE LOG] CONSOLE: ee.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ee.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dbt.u... {}
+[DEVICE LOG] CONSOLE: dbt.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dbt.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing sa.u... {}
+[DEVICE LOG] CONSOLE: sa.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: sa.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ie.u... {}
+[DEVICE LOG] CONSOLE: ie.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ie.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing hc.u... {}
+[DEVICE LOG] CONSOLE: hc.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: hc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ui.u... {}
+[DEVICE LOG] CONSOLE: ui.u initialized (Spatial Mode) {}
+[DEVICE LOG] CONSOLE: Lifecycle: ui.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing bridge.u... {}
+[DEVICE LOG] CONSOLE: bridge.u initialized {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Lifecycle: bridge.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing mesh.u... {}
+[DEVICE LOG] CONSOLE: mesh.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: mesh.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing disc.u... {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: disc.u initialized {}
+[DEVICE LOG] CONSOLE: Discovery: Instance ready for peer connections {}
+[DEVICE LOG] CONSOLE: Lifecycle: disc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing deploy.u... {}
+[DEVICE LOG] CONSOLE: deploy.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: deploy.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dns.u... {}
+[DEVICE LOG] CONSOLE: dns.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dns.u ready. {}
+[DEVICE LOG] BUS-EVENT: system.ready {'id': 'sys_ready_1770438337352', 'type': 'system.ready', 'timestamp': 1770438337352, 'source': 'kernel', 'content': 'All units initialized'}
+[DEVICE LOG] CONSOLE: Kernel: System ready in 1640ms {}
+[DEVICE LOG] CONSOLE: Boot: Sequence Complete {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Open FS {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Open FS {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[ADMIN] Queued command: reload
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected {}
+[SERVER] Sending command to client: reload
+[DEVICE LOG] CONSOLE: Boot: Phase 1 - DETECT {}
+[DEVICE LOG] CONSOLE: Capabilities detected: [object Object] {}
+[DEVICE LOG] CONSOLE: Boot: Phase 2 - INITIALIZE Kernel {}
+[DEVICE LOG] CONSOLE: Boot: Phase 3 - HYDRATE {}
+[DEVICE LOG] CONSOLE: StorageDB opened successfully {}
+[DEVICE LOG] CONSOLE: Hydrate: Database initialized {}
+[DEVICE LOG] CONSOLE: Boot: Phase 4 - WAKE {}
+[DEVICE LOG] CONSOLE: Kernel: Initializing... {}
+[DEVICE LOG] CONSOLE: Unit Registry loaded: 18 units {}
+[DEVICE LOG] CONSOLE: Lifecycle: Starting boot sequence... {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ec.u... {}
+[DEVICE LOG] CONSOLE: ec.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ec.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing pce.u... {}
+[DEVICE LOG] CONSOLE: pce.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: pce.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing as.u... {}
+[DEVICE LOG] CONSOLE: as.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: as.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ti.u... {}
+[DEVICE LOG] CONSOLE: ti.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ti.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing cm.u... {}
+[DEVICE LOG] CONSOLE: cm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: cm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing nlp.u... {}
+[DEVICE LOG] CONSOLE: nlp.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: nlp.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing gm.u... {}
+[DEVICE LOG] CONSOLE: gm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: gm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ee.u... {}
+[DEVICE LOG] CONSOLE: ee.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ee.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dbt.u... {}
+[DEVICE LOG] CONSOLE: dbt.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dbt.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing sa.u... {}
+[DEVICE LOG] CONSOLE: sa.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: sa.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ie.u... {}
+[DEVICE LOG] CONSOLE: ie.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ie.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing hc.u... {}
+[DEVICE LOG] CONSOLE: hc.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: hc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ui.u... {}
+[DEVICE LOG] CONSOLE: ui.u initialized (Spatial Mode) {}
+[DEVICE LOG] CONSOLE: Lifecycle: ui.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing bridge.u... {}
+[DEVICE LOG] CONSOLE: bridge.u initialized {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Lifecycle: bridge.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing mesh.u... {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: mesh.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: mesh.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing disc.u... {}
+[DEVICE LOG] CONSOLE: disc.u initialized {}
+[DEVICE LOG] CONSOLE: Discovery: Instance ready for peer connections {}
+[DEVICE LOG] CONSOLE: Lifecycle: disc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing deploy.u... {}
+[DEVICE LOG] CONSOLE: deploy.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: deploy.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dns.u... {}
+[DEVICE LOG] CONSOLE: dns.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dns.u ready. {}
+[DEVICE LOG] BUS-EVENT: system.ready {'id': 'sys_ready_1770438366017', 'type': 'system.ready', 'timestamp': 1770438366017, 'source': 'kernel', 'content': 'All units initialized'}
+[DEVICE LOG] CONSOLE: Kernel: System ready in 2635ms {}
+[DEVICE LOG] CONSOLE: Boot: Sequence Complete {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Boot: Phase 1 - DETECT {}
+[DEVICE LOG] CONSOLE: Capabilities detected: [object Object] {}
+[DEVICE LOG] CONSOLE: Boot: Phase 2 - INITIALIZE Kernel {}
+[DEVICE LOG] CONSOLE: Boot: Phase 3 - HYDRATE {}
+[DEVICE LOG] CONSOLE: StorageDB opened successfully {}
+[DEVICE LOG] CONSOLE: Hydrate: Database initialized {}
+[DEVICE LOG] CONSOLE: Boot: Phase 4 - WAKE {}
+[DEVICE LOG] CONSOLE: Kernel: Initializing... {}
+[DEVICE LOG] CONSOLE: Unit Registry loaded: 18 units {}
+[DEVICE LOG] CONSOLE: Lifecycle: Starting boot sequence... {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ec.u... {}
+[DEVICE LOG] CONSOLE: ec.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ec.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing pce.u... {}
+[DEVICE LOG] CONSOLE: pce.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: pce.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing as.u... {}
+[DEVICE LOG] CONSOLE: as.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: as.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ti.u... {}
+[DEVICE LOG] CONSOLE: ti.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ti.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing cm.u... {}
+[DEVICE LOG] CONSOLE: cm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: cm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing nlp.u... {}
+[DEVICE LOG] CONSOLE: nlp.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: nlp.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing gm.u... {}
+[DEVICE LOG] CONSOLE: gm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: gm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ee.u... {}
+[DEVICE LOG] CONSOLE: ee.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ee.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dbt.u... {}
+[DEVICE LOG] CONSOLE: dbt.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dbt.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing sa.u... {}
+[DEVICE LOG] CONSOLE: sa.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: sa.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ie.u... {}
+[DEVICE LOG] CONSOLE: ie.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ie.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing hc.u... {}
+[DEVICE LOG] CONSOLE: hc.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: hc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ui.u... {}
+[DEVICE LOG] CONSOLE: ui.u initialized (Spatial Mode) {}
+[DEVICE LOG] CONSOLE: Lifecycle: ui.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing bridge.u... {}
+[DEVICE LOG] CONSOLE: bridge.u initialized {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Lifecycle: bridge.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing mesh.u... {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: mesh.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: mesh.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing disc.u... {}
+[DEVICE LOG] CONSOLE: disc.u initialized {}
+[DEVICE LOG] CONSOLE: Discovery: Instance ready for peer connections {}
+[DEVICE LOG] CONSOLE: Lifecycle: disc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing deploy.u... {}
+[DEVICE LOG] CONSOLE: deploy.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: deploy.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dns.u... {}
+[DEVICE LOG] CONSOLE: dns.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dns.u ready. {}
+[DEVICE LOG] BUS-EVENT: system.ready {'id': 'sys_ready_1770438839853', 'type': 'system.ready', 'timestamp': 1770438839853, 'source': 'kernel', 'content': 'All units initialized'}
+[DEVICE LOG] CONSOLE: Kernel: System ready in 1757ms {}
+[DEVICE LOG] CONSOLE: Boot: Sequence Complete {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Boot: Phase 1 - DETECT {}
+[DEVICE LOG] CONSOLE: Capabilities detected: [object Object] {}
+[DEVICE LOG] CONSOLE: Boot: Phase 2 - INITIALIZE Kernel {}
+[DEVICE LOG] CONSOLE: Boot: Phase 3 - HYDRATE {}
+[DEVICE LOG] CONSOLE: StorageDB opened successfully {}
+[DEVICE LOG] CONSOLE: Hydrate: Database initialized {}
+[DEVICE LOG] CONSOLE: Boot: Phase 4 - WAKE {}
+[DEVICE LOG] CONSOLE: Kernel: Initializing... {}
+[DEVICE LOG] CONSOLE: Unit Registry loaded: 18 units {}
+[DEVICE LOG] CONSOLE: Lifecycle: Starting boot sequence... {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ec.u... {}
+[DEVICE LOG] CONSOLE: ec.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ec.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing pce.u... {}
+[DEVICE LOG] CONSOLE: pce.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: pce.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing as.u... {}
+[DEVICE LOG] CONSOLE: as.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: as.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ti.u... {}
+[DEVICE LOG] CONSOLE: ti.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ti.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing cm.u... {}
+[DEVICE LOG] CONSOLE: cm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: cm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing nlp.u... {}
+[DEVICE LOG] CONSOLE: nlp.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: nlp.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing gm.u... {}
+[DEVICE LOG] CONSOLE: gm.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: gm.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ee.u... {}
+[DEVICE LOG] CONSOLE: ee.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ee.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dbt.u... {}
+[DEVICE LOG] CONSOLE: dbt.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dbt.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing sa.u... {}
+[DEVICE LOG] CONSOLE: sa.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: sa.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ie.u... {}
+[DEVICE LOG] CONSOLE: ie.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: ie.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing hc.u... {}
+[DEVICE LOG] CONSOLE: hc.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: hc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing ui.u... {}
+[DEVICE LOG] CONSOLE: ui.u initialized (Spatial Mode) {}
+[DEVICE LOG] CONSOLE: Lifecycle: ui.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing bridge.u... {}
+[DEVICE LOG] CONSOLE: bridge.u initialized {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Lifecycle: bridge.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing mesh.u... {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: mesh.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: mesh.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing disc.u... {}
+[DEVICE LOG] CONSOLE: disc.u initialized {}
+[DEVICE LOG] CONSOLE: Discovery: Instance ready for peer connections {}
+[DEVICE LOG] CONSOLE: Lifecycle: disc.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing deploy.u... {}
+[DEVICE LOG] CONSOLE: deploy.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: deploy.u ready. {}
+[DEVICE LOG] CONSOLE: Lifecycle: Initializing dns.u... {}
+[DEVICE LOG] CONSOLE: dns.u initialized {}
+[DEVICE LOG] CONSOLE: Lifecycle: dns.u ready. {}
+[DEVICE LOG] BUS-EVENT: system.ready {'id': 'sys_ready_1770472051417', 'type': 'system.ready', 'timestamp': 1770472051417, 'source': 'kernel', 'content': 'All units initialized'}
+[DEVICE LOG] CONSOLE: Kernel: System ready in 1718ms {}
+[DEVICE LOG] CONSOLE: Boot: Sequence Complete {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
+[DEVICE LOG] CONSOLE: Bridge: WebSocket disconnected 1006  {}
+[DEVICE LOG] CONSOLE: Bridge: Connecting WSS to wss://192.168.1.163:8081 {}
