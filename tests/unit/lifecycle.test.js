@@ -9,15 +9,10 @@ import { Registry } from '../../src/kernel/registry.js';
 import { Bus } from '../../src/bus/bus.u.js';
 
 let _failed = false;
+const _tests = [];
 
 function test(name, fn) {
-  Promise.resolve().then(fn).then(() => {
-    console.log(`  ✓ ${name}`);
-  }).catch((e) => {
-    console.error(`  ✗ ${name}:`, e.message);
-    _failed = true;
-  });
-  _count++;
+  _tests.push({ name, fn });
 }
 
 let _count = 0;
@@ -92,4 +87,16 @@ test('get returns running instance', async () => {
   assert(typeof inst.init === 'function', 'instance should have init method');
 });
 
-setTimeout(() => { if (_failed) process.exitCode = 1; }, 3000);
+/* Run all tests sequentially, awaiting async ones */
+(async () => {
+  for (const { name, fn } of _tests) {
+    try {
+      await fn();
+      console.log(`  ✓ ${name}`);
+    } catch (e) {
+      console.error(`  ✗ ${name}:`, e.message);
+      _failed = true;
+    }
+  }
+  if (_failed) process.exitCode = 1;
+})();

@@ -5,7 +5,7 @@
  * in the correct dependency order defined by the registry.
  */
 
-/** Map of unit id → ES module path (relative to project root) */
+/** Map of unit id → ES module path (relative to this module – src/kernel/) */
 const UNIT_MODULES = {
   'pce.u':       '../units/pce.u.js',
   'as.u':        '../units/as.u.js',
@@ -73,6 +73,12 @@ export class Lifecycle {
 
   /** Start a single unit */
   async start(unitId) {
+    /* Guard against starting an already-running unit */
+    if (this.running.has(unitId)) {
+      console.warn('[lifecycle] unit already running:', unitId);
+      return;
+    }
+
     const modulePath = UNIT_MODULES[unitId];
     if (!modulePath) {
       console.warn('[lifecycle] unknown unit:', unitId);
@@ -89,15 +95,19 @@ export class Lifecycle {
       }
 
       const instance = new UnitClass(this.bus);
-      this.instances.set(unitId, instance);
 
       if (typeof instance.init === 'function') {
         await instance.init();
       }
 
+      /* Only track instance after successful init */
+      this.instances.set(unitId, instance);
       this.running.add(unitId);
       this.bus.emit('unit.started', { unitId, timestamp: Date.now() });
     } catch (err) {
+      /* Clean up any partially-created instance on failure */
+      this.instances.delete(unitId);
+      this.running.delete(unitId);
       console.error('[lifecycle] failed to start unit:', unitId, err);
       this.bus.emit('unit.error', { unitId, error: err.message });
     }

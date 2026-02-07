@@ -60,12 +60,14 @@ export async function recover(status) {
 
 async function clearAllState() {
   /* Delete IndexedDB databases */
-  const dbs = ['statik_memory', 'statik_state', 'statik_logs'];
-  await Promise.allSettled(dbs.map((name) => new Promise((resolve, reject) => {
-    const req = indexedDB.deleteDatabase(name);
-    req.onsuccess = resolve;
-    req.onerror = reject;
-  })));
+  if (typeof indexedDB !== 'undefined') {
+    const dbs = ['statik_memory', 'statik_state', 'statik_logs'];
+    await Promise.allSettled(dbs.map((name) => new Promise((resolve, reject) => {
+      const req = indexedDB.deleteDatabase(name);
+      req.onsuccess = resolve;
+      req.onerror = reject;
+    })));
+  }
 
   /* Clear OPFS if available */
   if (typeof navigator !== 'undefined' && navigator.storage?.getDirectory) {

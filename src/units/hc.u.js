@@ -28,7 +28,7 @@ export class HomeostasisUnit {
     /* Query storage quota */
     if (typeof navigator !== 'undefined' && navigator.storage?.estimate) {
       navigator.storage.estimate().then(({ quota, usage }) => {
-        if (quota && usage) {
+        if (typeof quota === 'number' && typeof usage === 'number' && quota > 0) {
           const pct = usage / quota;
           if (pct > 0.9) this.bus.emit('storage.critical', { usage, quota });
           else if (pct > 0.7) this.bus.emit('storage.warn', { usage, quota });

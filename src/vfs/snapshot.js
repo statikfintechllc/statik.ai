@@ -61,16 +61,10 @@ export class SnapshotManager {
 
   /** Restore a single IndexedDB database from snapshot data */
   async _restoreDB(name, stores) {
+    /* Use backup.js importState if available, otherwise write directly into existing stores */
     return new Promise((resolve) => {
-      const req = indexedDB.open(name, 1);
-      req.onupgradeneeded = (e) => {
-        const db = e.target.result;
-        for (const storeName of Object.keys(stores)) {
-          if (!db.objectStoreNames.contains(storeName)) {
-            db.createObjectStore(storeName, { keyPath: 'id' });
-          }
-        }
-      };
+      /* Open without version bump – do not recreate stores with wrong schemas */
+      const req = indexedDB.open(name);
       req.onerror = () => resolve();
       req.onsuccess = () => {
         const db = req.result;

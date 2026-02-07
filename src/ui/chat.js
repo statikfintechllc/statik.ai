@@ -12,6 +12,8 @@ export class Chat {
     this.container = null;
     this.logEl = null;
     this.inputEl = null;
+    this._unsubs = [];
+    this._domCleanups = [];
   }
 
   /** Mount the chat UI */
@@ -38,13 +40,17 @@ export class Chat {
       this.onSubmit(text);
     };
 
-    sendBtn.addEventListener('click', submit);
-    this.inputEl.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') submit();
-    });
+    const clickHandler = () => submit();
+    const keyHandler = (e) => { if (e.key === 'Enter') submit(); };
+    sendBtn.addEventListener('click', clickHandler);
+    this.inputEl.addEventListener('keydown', keyHandler);
+    this._domCleanups.push(
+      () => sendBtn.removeEventListener('click', clickHandler),
+      () => this.inputEl.removeEventListener('keydown', keyHandler)
+    );
 
     /* Listen for system messages */
-    this.bus.on('ui.message', (msg) => this.addMessage(msg));
+    this._unsubs.push(this.bus.on('ui.message', (msg) => this.addMessage(msg)));
   }
 
   /** Add a message to the chat log */
@@ -67,6 +73,10 @@ export class Chat {
   }
 
   destroy() {
+    this._unsubs.forEach((fn) => fn());
+    this._unsubs = [];
+    this._domCleanups.forEach((fn) => fn());
+    this._domCleanups = [];
     this.messages = [];
     if (this.container) this.container.innerHTML = '';
   }

@@ -10,6 +10,7 @@ export class PerformanceInspector {
     this.bus = bus;
     this.container = null;
     this.metrics = {};
+    this._unsub = null;
   }
 
   mount(container) {
@@ -20,7 +21,7 @@ export class PerformanceInspector {
         <div class="perf-metrics"></div>
       </div>`;
 
-    this.bus.on('telemetry.snapshot', (data) => {
+    this._unsub = this.bus.on('telemetry.snapshot', (data) => {
       this.metrics = data;
       this._render();
     });
@@ -52,6 +53,7 @@ export class PerformanceInspector {
   }
 
   destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
     if (this.container) this.container.innerHTML = '';
   }
 }

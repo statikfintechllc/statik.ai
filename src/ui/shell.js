@@ -12,6 +12,7 @@ export class Shell {
     this.bus = bus;
     this.container = null;
     this.chat = null;
+    this._unsubs = [];
   }
 
   /** Mount the shell into the DOM */
@@ -28,6 +29,7 @@ export class Shell {
         </div>
       </header>
       <div id="chat-container" style="flex:1;display:flex;flex-direction:column;overflow:hidden"></div>
+      <div id="inspector" hidden style="border-top:1px solid var(--border);max-height:40vh;overflow-y:auto;background:var(--surface)"></div>
       <footer id="shell-status" style="padding:0.25rem 1rem;font-size:0.75rem;color:#666;border-top:1px solid var(--border)">
         <span id="status-text">Booting…</span>
       </footer>`;
@@ -44,8 +46,8 @@ export class Shell {
     });
 
     /* Listen for status updates */
-    this.bus.on('system.ready', () => this._setStatus('Ready'));
-    this.bus.on('ui.status', (s) => this._setStatus(s.text || JSON.stringify(s)));
+    this._unsubs.push(this.bus.on('system.ready', () => this._setStatus('Ready')));
+    this._unsubs.push(this.bus.on('ui.status', (s) => this._setStatus(s.text || JSON.stringify(s))));
 
     this.bus.emit('ui.shell.mounted', { timestamp: Date.now() });
   }
@@ -62,6 +64,8 @@ export class Shell {
   }
 
   destroy() {
+    this._unsubs.forEach((fn) => fn());
+    this._unsubs = [];
     if (this.chat) this.chat.destroy();
     if (this.container) this.container.innerHTML = '';
   }

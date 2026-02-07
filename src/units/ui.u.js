@@ -15,10 +15,11 @@ export class UIUnit {
     this.bus = bus;
     this.id = 'ui.u';
     this.shell = null;
+    this._unsub = null;
   }
 
   init() {
-    this.bus.on('system.ready', () => this._renderShell());
+    this._unsub = this.bus.on('system.ready', () => this._renderShell());
     this.bus.emit('unit.ready', { unitId: this.id });
   }
 
@@ -42,6 +43,7 @@ export class UIUnit {
   }
 
   destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
     if (this.shell) this.shell.destroy();
   }
 }

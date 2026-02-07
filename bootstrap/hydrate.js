@@ -14,6 +14,9 @@ const DEFAULT_STATE = {
   units: {},
 };
 
+/** Fixed key used for the single kernel_state record */
+const KERNEL_STATE_KEY = 'latest';
+
 export async function hydrate() {
   const existing = await loadSavedState();
 
@@ -24,7 +27,7 @@ export async function hydrate() {
   }
 
   /* No prior state – start fresh with defaults */
-  const state = { ...DEFAULT_STATE, created: Date.now() };
+  const state = { ...DEFAULT_STATE, _key: KERNEL_STATE_KEY, created: Date.now() };
   await persistKernelState(state);
   return { fresh: true, state };
 }
@@ -37,13 +40,15 @@ async function loadSavedState() {
   if (typeof indexedDB === 'undefined') return null;
 
   return new Promise((resolve) => {
-    const req = indexedDB.open('statik_state', 1);
+    const req = indexedDB.open('statik_state', 2);
     req.onerror = () => resolve(null);
     req.onupgradeneeded = (e) => {
       const db = e.target.result;
-      if (!db.objectStoreNames.contains('kernel_state')) {
-        db.createObjectStore('kernel_state', { keyPath: 'boot_count' });
+      /* Migrate: drop old boot_count-keyed store, create _key-keyed store */
+      if (db.objectStoreNames.contains('kernel_state')) {
+        db.deleteObjectStore('kernel_state');
       }
+      db.createObjectStore('kernel_state', { keyPath: '_key' });
       if (!db.objectStoreNames.contains('unit_states')) {
         db.createObjectStore('unit_states', { keyPath: 'unit_id' });
       }
@@ -56,37 +61,32 @@ async function loadSavedState() {
       }
       const tx = db.transaction('kernel_state', 'readonly');
       const store = tx.objectStore('kernel_state');
-      const getAll = store.getAll();
-      getAll.onsuccess = () => {
-        const results = getAll.result;
-        let latest = null;
-        if (Array.isArray(results) && results.length > 0) {
-          latest = results.reduce((acc, item) => {
-            if (!item || typeof item.boot_count !== 'number') return acc || null;
-            if (!acc || typeof acc.boot_count !== 'number') return item;
-            return item.boot_count > acc.boot_count ? item : acc;
-          }, null);
-        }
+      const getReq = store.get(KERNEL_STATE_KEY);
+      getReq.onsuccess = () => {
         db.close();
-        resolve(latest || null);
+        resolve(getReq.result || null);
       };
-      getAll.onerror = () => { db.close(); resolve(null); };
+      getReq.onerror = () => { db.close(); resolve(null); };
     };
   });
 }
 
-/** Persist kernel state to IndexedDB */
+/** Persist kernel state to IndexedDB using a fixed key */
 async function persistKernelState(state) {
   if (typeof indexedDB === 'undefined') return;
 
+  /* Ensure the record has the fixed key */
+  state._key = KERNEL_STATE_KEY;
+
   return new Promise((resolve) => {
-    const req = indexedDB.open('statik_state', 1);
+    const req = indexedDB.open('statik_state', 2);
     req.onerror = () => resolve();
     req.onupgradeneeded = (e) => {
       const db = e.target.result;
-      if (!db.objectStoreNames.contains('kernel_state')) {
-        db.createObjectStore('kernel_state', { keyPath: 'boot_count' });
+      if (db.objectStoreNames.contains('kernel_state')) {
+        db.deleteObjectStore('kernel_state');
       }
+      db.createObjectStore('kernel_state', { keyPath: '_key' });
       if (!db.objectStoreNames.contains('unit_states')) {
         db.createObjectStore('unit_states', { keyPath: 'unit_id' });
       }

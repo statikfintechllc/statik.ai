@@ -10,6 +10,9 @@ export class TraceInspector {
     this.bus = bus;
     this.traces = [];
     this.container = null;
+    this._unsub = null;
+    this._rafId = null;
+    this._renderPending = false;
   }
 
   mount(container) {
@@ -21,9 +24,9 @@ export class TraceInspector {
       </div>`;
 
     /* Tap into bus via wildcard subscriber */
-    this.bus.on('*', (payload, msg) => {
+    this._unsub = this.bus.on('*', (payload, msg) => {
       this.capture(msg);
-      this._render();
+      this._scheduleRender();
     });
 
     /* Populate initial traces from bus history */
@@ -54,7 +57,21 @@ export class TraceInspector {
       </div>`).join('');
   }
 
+  /** Batch renders via requestAnimationFrame to avoid per-message reflows */
+  _scheduleRender() {
+    if (this._renderPending) return;
+    this._renderPending = true;
+    const raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : (fn) => setTimeout(fn, 16);
+    this._rafId = raf(() => {
+      this._renderPending = false;
+      this._render();
+    });
+  }
+
   destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
+    if (this._rafId && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(this._rafId);
+    this._renderPending = false;
     this.traces = [];
     if (this.container) this.container.innerHTML = '';
   }

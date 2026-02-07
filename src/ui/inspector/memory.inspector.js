@@ -10,6 +10,7 @@ export class MemoryInspector {
     this.bus = bus;
     this.container = null;
     this.memories = [];
+    this._unsub = null;
   }
 
   /** Render memory list into a container */
@@ -25,13 +26,22 @@ export class MemoryInspector {
     const searchInput = container.querySelector('.memory-search');
     searchInput?.addEventListener('input', (e) => this._filter(e.target.value));
 
-    this.bus.on('memory.stored', () => this.refresh());
+    this._unsub = this.bus.on('memory.stored', () => this.refresh());
     this.refresh();
   }
 
   /** Refresh the memory view */
-  refresh() {
-    this.bus.emit('memory.query.request', { keywords: [], limit: 50 });
+  async refresh() {
+    if (typeof this.bus.request === 'function') {
+      try {
+        const result = await this.bus.request('memory.query', { keywords: [], limit: 50 }, 2000);
+        const memories = Array.isArray(result)
+          ? result
+          : (result && Array.isArray(result.memories) ? result.memories : []);
+        this.update(memories);
+        return;
+      } catch (_) { /* fall through to render current data */ }
+    }
     this._render(this.memories);
   }
 
@@ -66,6 +76,7 @@ export class MemoryInspector {
   }
 
   destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
     if (this.container) this.container.innerHTML = '';
   }
 }

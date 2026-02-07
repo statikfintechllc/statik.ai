@@ -9,6 +9,7 @@ export class Watchdog {
   constructor(bus) {
     this.bus = bus;
     this.heartbeats = new Map(); // unitId → last timestamp
+    this.restarting = new Set(); // units currently being restarted
     this.interval = null;
     this.timeoutMs = 30000; // consider dead after 30s silence
   }
@@ -19,6 +20,7 @@ export class Watchdog {
     this.lifecycle = lifecycle;
     this.bus.on('unit.heartbeat', (msg) => {
       this.heartbeats.set(msg.unitId, Date.now());
+      this.restarting.delete(msg.unitId);
     });
     this.interval = setInterval(() => this.check(), this.timeoutMs / 2);
   }
@@ -33,12 +35,15 @@ export class Watchdog {
   check() {
     const now = Date.now();
     for (const [unitId, last] of this.heartbeats) {
-      if (now - last > this.timeoutMs) {
+      if (now - last > this.timeoutMs && !this.restarting.has(unitId)) {
         console.warn('[watchdog] unit unresponsive:', unitId);
         this.bus.emit('unit.unresponsive', { unitId, lastSeen: last });
+        this.restarting.add(unitId);
+        this.heartbeats.delete(unitId);
         if (this.lifecycle) {
           this.lifecycle.restart(unitId).catch((err) => {
             console.error('[watchdog] restart failed:', unitId, err);
+            this.restarting.delete(unitId);
           });
         }
       }

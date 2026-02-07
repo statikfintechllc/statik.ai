@@ -29,11 +29,17 @@ export class SyncUnit {
     if (this.channel) this.channel.postMessage(data);
   }
 
-  /** Export system state as JSON */
-  exportState() {
+  /** Export system state as JSON (async – aggregates replies) */
+  async exportState() {
     const state = { timestamp: Date.now(), units: {} };
-    /* Collect state snapshots from any unit that replied */
-    this.bus.emit('state.export.request', {});
+    if (typeof this.bus.request === 'function') {
+      try {
+        const result = await this.bus.request('state.export', {}, 3000);
+        if (result && typeof result === 'object') {
+          state.units = result.units || result;
+        }
+      } catch (_) { /* timeout or no responder – return empty state */ }
+    }
     return state;
   }
 

@@ -7,10 +7,10 @@
 import { Bus } from '../../src/bus/bus.u.js';
 
 let _failed = false;
+const _tests = [];
 
 function test(name, fn) {
-  try { fn(); console.log(`  ✓ ${name}`); }
-  catch (e) { console.error(`  ✗ ${name}:`, e.message); _failed = true; }
+  _tests.push({ name, fn });
 }
 
 function assert(condition, msg) { if (!condition) throw new Error(msg); }
@@ -93,3 +93,17 @@ test('request timeout rejects', async () => {
 });
 
 if (_failed) process.exitCode = 1;
+
+/* Run all tests sequentially, awaiting async ones */
+(async () => {
+  for (const { name, fn } of _tests) {
+    try {
+      await fn();
+      console.log(`  ✓ ${name}`);
+    } catch (e) {
+      console.error(`  ✗ ${name}:`, e.message);
+      _failed = true;
+    }
+  }
+  if (_failed) process.exitCode = 1;
+})();

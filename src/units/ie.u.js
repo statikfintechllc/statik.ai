@@ -9,25 +9,27 @@ export class IntentExecutionUnit {
   constructor(bus) {
     this.bus = bus;
     this.id = 'ie.u';
+    this._unsub = null;
   }
 
   init() {
-    this.bus.on('goal.new', (goal) => this.execute(goal));
+    this._unsub = this.bus.on('goal.new', (goal) => this.execute(goal));
     this.bus.emit('unit.ready', { unitId: this.id });
   }
 
   /** Execute a goal */
   async execute(goal) {
-    /* Step 1 – validate against ec.u constraints */
-    let allowed = true;
+    /* Step 1 – validate against ec.u constraints (fail closed) */
+    let allowed = false;
     try {
       const verdict = await this.bus.request('ec.validate', goal, 2000);
-      allowed = verdict?.allowed !== false;
+      allowed = verdict?.allowed === true;
     } catch (_) {
-      /* If ec.u unavailable, allow by default */
+      /* If ec.u unavailable, block by default (fail closed) */
+      allowed = false;
     }
     if (!allowed) {
-      this.bus.emit('action.blocked', { id: goal.id, reason: 'constraint_violation' });
+      this.bus.emit('action.blocked', { id: goal.id, reason: 'constraint_validation_failed' });
       return;
     }
 
@@ -71,5 +73,7 @@ export class IntentExecutionUnit {
     }
   }
 
-  destroy() {}
+  destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
+  }
 }

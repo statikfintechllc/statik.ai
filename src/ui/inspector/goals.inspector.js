@@ -10,6 +10,7 @@ export class GoalsInspector {
     this.bus = bus;
     this.goals = [];
     this.container = null;
+    this._unsubs = [];
   }
 
   mount(container) {
@@ -20,17 +21,17 @@ export class GoalsInspector {
         <div class="goals-list"></div>
       </div>`;
 
-    this.bus.on('goal.new', (goal) => {
+    this._unsubs.push(this.bus.on('goal.new', (goal) => {
       this.goals.push(goal);
       if (this.goals.length > 50) this.goals.shift();
       this._render();
-    });
+    }));
 
-    this.bus.on('action.completed', (result) => {
+    this._unsubs.push(this.bus.on('action.completed', (result) => {
       const g = this.goals.find((g) => g.id === result.id);
       if (g) g.status = result.outcome?.error ? 'failed' : 'done';
       this._render();
-    });
+    }));
 
     this._render();
   }
@@ -55,6 +56,8 @@ export class GoalsInspector {
   }
 
   destroy() {
+    this._unsubs.forEach((fn) => fn());
+    this._unsubs = [];
     this.goals = [];
     if (this.container) this.container.innerHTML = '';
   }

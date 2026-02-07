@@ -7,24 +7,10 @@
 import { Kernel } from '../../src/kernel/kernel.u.js';
 
 let _failed = false;
+const _tests = [];
 
 function test(name, fn) {
-  Promise.resolve().then(fn).then(() => {
-    console.log(`  ✓ ${name}`);
-  }).catch((e) => {
-    console.error(`  ✗ ${name}:`, e.message);
-    _failed = true;
-  }).finally(() => {
-    if (_done) checkDone();
-  });
-  _pending++;
-}
-
-let _pending = 0;
-let _done = false;
-function checkDone() {
-  _pending--;
-  if (_pending <= 0 && _failed) process.exitCode = 1;
+  _tests.push({ name, fn });
 }
 
 function assert(condition, msg) { if (!condition) throw new Error(msg); }
@@ -57,8 +43,16 @@ test('shutdown resets state to idle', async () => {
   assert(kernel.state === 'idle', 'state should be idle after shutdown');
 });
 
-// Signal that all tests have been registered
-setTimeout(() => {
-  _done = true;
-  if (_pending <= 0 && _failed) process.exitCode = 1;
-}, 2000);
+/* Run all tests sequentially, awaiting async ones */
+(async () => {
+  for (const { name, fn } of _tests) {
+    try {
+      await fn();
+      console.log(`  ✓ ${name}`);
+    } catch (e) {
+      console.error(`  ✗ ${name}:`, e.message);
+      _failed = true;
+    }
+  }
+  if (_failed) process.exitCode = 1;
+})();
