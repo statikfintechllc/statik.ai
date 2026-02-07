@@ -8,17 +8,52 @@
 export class PerformanceInspector {
   constructor(bus) {
     this.bus = bus;
+    this.container = null;
+    this.metrics = {};
+    this._unsub = null;
   }
 
   mount(container) {
     this.container = container;
-    // TODO: subscribe to telemetry.u metrics
-    // TODO: render charts / gauges
+    container.innerHTML = `
+      <div class="inspector-section">
+        <h3>Performance</h3>
+        <div class="perf-metrics"></div>
+      </div>`;
+
+    this._unsub = this.bus.on('telemetry.snapshot', (data) => {
+      this.metrics = data;
+      this._render();
+    });
+
+    this._render();
   }
 
   refresh() {
-    // TODO: re-query telemetry.u and re-render
+    this.bus.emit('telemetry.request', { timestamp: Date.now() });
+    this._render();
   }
 
-  destroy() {}
+  _render() {
+    const el = this.container?.querySelector('.perf-metrics');
+    if (!el) return;
+
+    const entries = [
+      { label: 'Messages/s', value: this.metrics.msgPerSec ?? '—' },
+      { label: 'Units active', value: this.metrics.unitsActive ?? '—' },
+      { label: 'Memory (MB)', value: this.metrics.memoryMB ?? '—' },
+      { label: 'Errors', value: this.metrics.errorCount ?? 0 },
+    ];
+
+    el.innerHTML = entries.map((e) => `
+      <div class="inspector-metric">
+        <span class="label">${e.label}</span>
+        <span class="value">${e.value}</span>
+      </div>`).join('');
+  }
+
+  destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
+    if (this.container) this.container.innerHTML = '';
+  }
 }

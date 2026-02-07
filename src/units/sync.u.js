@@ -29,15 +29,25 @@ export class SyncUnit {
     if (this.channel) this.channel.postMessage(data);
   }
 
-  /** Export system state as JSON */
-  exportState() {
-    // TODO: gather state from all units via bus
-    return { timestamp: Date.now(), state: {} };
+  /** Export system state as JSON (async – aggregates replies) */
+  async exportState() {
+    const state = { timestamp: Date.now(), units: {} };
+    if (typeof this.bus.request === 'function') {
+      try {
+        const result = await this.bus.request('state.export', {}, 3000);
+        if (result && typeof result === 'object') {
+          state.units = result.units || result;
+        }
+      } catch (_) { /* timeout or no responder – return empty state */ }
+    }
+    return state;
   }
 
   /** Import state from JSON */
   importState(json) {
-    // TODO: distribute imported state to units via bus
+    if (json && json.units) {
+      this.bus.emit('state.import', json);
+    }
     this.bus.emit('sync.imported', { timestamp: Date.now() });
   }
 

@@ -14,10 +14,13 @@ export class PerceptionUnit {
     this.bus = bus;
     this.id = 'pce.u';
     this.recentHashes = new Set();
+    this._unsub = null;
   }
 
   init() {
-    // TODO: subscribe to raw input channels
+    this._unsub = this.bus.on('user.input', (msg) => {
+      if (msg && msg.text) this.encode(msg.text);
+    });
     this.bus.emit('unit.ready', { unitId: this.id });
   }
 
@@ -64,5 +67,7 @@ export class PerceptionUnit {
     return 1.0;
   }
 
-  destroy() {}
+  destroy() {
+    if (this._unsub) { this._unsub(); this._unsub = null; }
+  }
 }

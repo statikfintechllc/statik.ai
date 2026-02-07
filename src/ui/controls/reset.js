@@ -17,8 +17,28 @@ export class ResetControl {
   /** Full system reset – clears all state */
   async resetAll() {
     this.bus.emit('system.reset', { timestamp: Date.now() });
-    // TODO: clear IndexedDB databases
-    // TODO: clear OPFS
-    // TODO: reload page
+
+    /* Clear IndexedDB databases */
+    if (typeof indexedDB !== 'undefined') {
+      const dbs = ['statik_memory', 'statik_state', 'statik_logs'];
+      await Promise.allSettled(dbs.map((name) => new Promise((resolve, reject) => {
+        const req = indexedDB.deleteDatabase(name);
+        req.onsuccess = resolve;
+        req.onerror = reject;
+      })));
+    }
+
+    /* Clear OPFS if available */
+    if (typeof navigator !== 'undefined' && navigator.storage?.getDirectory) {
+      try {
+        const root = await navigator.storage.getDirectory();
+        for await (const name of root.keys()) {
+          await root.removeEntry(name, { recursive: true });
+        }
+      } catch (_) { /* best-effort */ }
+    }
+
+    /* Reload the page */
+    if (typeof location !== 'undefined') location.reload();
   }
 }
