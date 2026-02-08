@@ -555,7 +555,7 @@ Built with:
 
 ## Contact
 
-- GitHub: [@statikfintechllx](https://github.com/statikfintechllc)
+- GitHub: [@statikfintechllc](https://github.com/statikfintechllc)
 - Issues: [GitHub Issues](https://github.com/statikfintechllc/statik-ai/issues)
 - Discussions: [GitHub Discussions](https://github.com/statikfintechllc/statik-ai/discussions)
 
