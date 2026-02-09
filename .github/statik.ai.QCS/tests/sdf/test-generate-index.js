@@ -110,14 +110,15 @@ assert.strictEqual(
   EXPECTED_KNOWN_ISSUES,
   `Expected ${EXPECTED_KNOWN_ISSUES} known issues, got ${KNOWN_ISSUES.length}`
 );
-for (const issue of KNOWN_ISSUES) {
-  assert.ok(issue.id, 'KNOWN_ISSUE missing "id"');
-  assert.ok(issue.severity, 'KNOWN_ISSUE missing "severity"');
-  assert.ok(issue.description, 'KNOWN_ISSUE missing "description"');
-  assert.ok(issue.docs, 'KNOWN_ISSUE missing "docs"');
+for (let i = 0; i < KNOWN_ISSUES.length; i++) {
+  const ki = KNOWN_ISSUES[i];
+  assert.ok(ki.severity, `KNOWN_ISSUES[${i}] missing "severity"`);
+  assert.ok(ki.issue, `KNOWN_ISSUES[${i}] missing "issue"`);
+  assert.ok(ki.docs, `KNOWN_ISSUES[${i}] missing "docs"`);
+  assert.ok(Array.isArray(ki.docs), `KNOWN_ISSUES[${i}] "docs" must be an array`);
   assert.ok(
-    ['high', 'medium', 'low'].includes(issue.severity),
-    `KNOWN_ISSUE "${issue.id}" has invalid severity "${issue.severity}"`
+    ['high', 'medium', 'low'].includes(ki.severity),
+    `KNOWN_ISSUES[${i}] has invalid severity "${ki.severity}"`
   );
 }
 console.log(`  ✓ KNOWN_ISSUES has ${EXPECTED_KNOWN_ISSUES} issues with valid structure`);
