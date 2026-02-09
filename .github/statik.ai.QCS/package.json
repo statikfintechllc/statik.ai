@@ -1,0 +1,29 @@
+{
+  "name": "statik-ai-qcs",
+  "version": "2.0.0",
+  "description": "statik.ai Quality Control System — SDF-driven CI enforcement",
+  "private": true,
+  "scripts": {
+    "test": "node tests/sdf/test-generate-index.js && node tests/sdf/test-check-docs.js && node tests/sdf/test-validate-schemas.js && node tests/sdf/test-validate-assets.js",
+    "test:index": "node tests/sdf/test-generate-index.js",
+    "test:docs": "node tests/sdf/test-check-docs.js",
+    "test:schemas": "node tests/sdf/test-validate-schemas.js",
+    "test:assets": "node tests/sdf/test-validate-assets.js",
+    "generate-sdf-index": "node scripts/generate-sdf-index.js",
+    "check-docs": "node scripts/check-docs.js",
+    "validate-schemas": "node scripts/validate-schemas.js",
+    "validate-assets": "node scripts/validate-assets.js",
+    "qa": "npm run generate-sdf-index && npm run check-docs && npm run validate-schemas && npm run validate-assets"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "statik.ai",
+    "qcs",
+    "quality-control",
+    "sdf",
+    "ci"
+  ],
+  "license": "UNLICENSED"
+}

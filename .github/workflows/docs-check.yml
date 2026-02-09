@@ -1,0 +1,66 @@
+name: SDF Docs Check & Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, master]
+
+jobs:
+  docs-check:
+    name: SDF Alignment & Validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need full history for diff
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # ── Get changed files ──────────────────────────────────────────────
+      - name: Get changed files
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | tr '\n' ',')
+          else
+            FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | tr '\n' ',')
+          fi
+          echo "files=${FILES%,}" >> "$GITHUB_OUTPUT"
+          echo "Changed files: ${FILES%,}"
+
+      # ── Generate SDF index ─────────────────────────────────────────────
+      - name: Generate SDF index
+        run: node .github/statik.ai.QCS/scripts/generate-sdf-index.js
+
+      # ── Run docs-check (blocks merge) ──────────────────────────────────
+      - name: Run docs-check
+        if: steps.changed.outputs.files != ''
+        run: node .github/statik.ai.QCS/scripts/check-docs.js --files "${{ steps.changed.outputs.files }}"
+
+      # ── Run schema validators ──────────────────────────────────────────
+      - name: Validate schemas
+        if: contains(steps.changed.outputs.files, 'schemas/') || contains(steps.changed.outputs.files, 'configs/')
+        run: node .github/statik.ai.QCS/scripts/validate-schemas.js --files "${{ steps.changed.outputs.files }}"
+
+      # ── Run asset validators ───────────────────────────────────────────
+      - name: Validate assets
+        if: contains(steps.changed.outputs.files, 'assets/')
+        run: node .github/statik.ai.QCS/scripts/validate-assets.js --files "${{ steps.changed.outputs.files }}"
+
+      # ── Run QA test suite ──────────────────────────────────────────────
+      - name: Run QA tests
+        working-directory: .github/statik.ai.QCS
+        run: |
+          echo "Running SDF QA test suite..."
+          node tests/sdf/test-generate-index.js
+          node tests/sdf/test-check-docs.js
+          node tests/sdf/test-validate-schemas.js
+          node tests/sdf/test-validate-assets.js
+          echo "All QA tests passed ✓"
