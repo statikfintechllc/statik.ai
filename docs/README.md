@@ -2,18 +2,18 @@
 
 ## StatikFinTech Intelligence Presents
 # statik.ai
-***The World's First* full Client Side Agent Operating System – *CSA.OS***
+***The World's First* full Client Side Agent Operating System – *CSA.OS* an Autonomous Cognitive Runtime for the Browser**
 
 </div>
 
-**Autonomous Cognitive Runtime for the Browser**
+> [!NOTE]
+>
+> Just like GremlinGPT, this is going to be a Spec First Build, but with better alignment, sequencing, module understanding, and True Custom Dependicies.
+> These where all hallucinated in the GremlinGPT build from April of 2025
 
-> ***Statik.ai*** is a modular AI system that runs entirely in your browser. 
-> 
-> *Unlike* traditional *AI assistants* that rely on *cloud APIs*, ***Statik.ai*** uses rule-based *pattern matching*, *delta learning*, and *autonomous goal generation* to provide intelligent assistance *without monthly subscriptions* or *privacy concerns*.
-> **A browser-native cognitive runtime that learns, adapts, and acts autonomously—without cloud APIs or subscriptions.**
+**Here are the *Key Features* of the browser-native cognitive runtime that learns, adapts, and acts autonomously:**
 
-**Key Features:**
+
 - 🧠 **19 cognitive units** (perception, attention, memory, learning, goals)
 - 🔄 **Delta-based learning** (improves from feedback without retraining)
 - 🎯 **Autonomous goals** (proactive behavior, not just reactive)
@@ -22,6 +22,13 @@
 - 🛠️ **Self-modifying** (edit own source code via Monaco editor)
 - 📱 **PWA ready** (install on iPhone, works offline)
 - 🔒 **Privacy-first** (all data stays local)
+
+***P.S*: all without cloud APIs or subscriptions**
+
+> [!IMPORTANT]
+> ***Statik.ai*** is a modular AI system that runs entirely in your browser. 
+> 
+> *Unlike* traditional *AI assistants* that rely on *cloud APIs*, ***Statik.ai*** uses rule-based *pattern matching*, *delta learning*, and *autonomous goal generation* to provide intelligent assistance *without monthly subscriptions* or *privacy concerns*.
 
 **Built with:** Vanilla JavaScript (ES2022+), Web Workers, IndexedDB, WebRTC, Service Workers
 
