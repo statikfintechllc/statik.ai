@@ -152,3 +152,45 @@ test('User has multi-turn conversation', async ({ page }) => {
 
 ---
 
+## Browser-Native Test Runner
+
+Since the CSA.OS runs entirely in the browser, tests MUST be executable in the browser:
+
+### Test Runner Architecture
+
+- **Runner:** Custom lightweight test runner that runs as a unit (test.runner.u.js)
+- **Execution:** Tests loaded as ES modules, executed in browser context
+- **Output:** Results emitted to bus topic `test.result`, displayed in UI inspector
+- **Trigger:** dev.u `?dev=true` mode OR bridge.u remote test command
+
+### Performance Benchmarks (Enforced)
+
+| Metric | Target | Test |
+|--------|--------|------|
+| Cold boot time | <2000ms | tests/e2e/boot.benchmark.js |
+| Message latency (bus) | <15ms avg | tests/unit/bus.benchmark.js |
+| NLP Tier 1 (regex) | <5ms | tests/unit/nlp.tier1.benchmark.js |
+| NLP Tier 2 (statistical) | <50ms | tests/unit/nlp.tier2.benchmark.js |
+| NLP Tier 3 (inference) | <200ms | tests/unit/nlp.tier3.benchmark.js |
+| Memory retrieval (TF-IDF) | <50ms | tests/unit/cm.benchmark.js |
+
+### Security Tests
+
+- `tests/security/csp.test.js`: Verify CSP blocks inline scripts and external resources
+- `tests/security/encryption.test.js`: Verify all mesh traffic is encrypted
+- `tests/security/auth.test.js`: Verify peer authentication handshake
+- `tests/security/selfmod.test.js`: Verify self-modification safety rails
+
+### P2P Mesh Tests
+
+- `tests/integration/mesh.connect.test.js`: Two instances discover and connect
+- `tests/integration/mesh.sync.test.js`: State sync between two instances
+- `tests/integration/mesh.conflict.test.js`: Conflict resolution for concurrent edits
+- `tests/integration/mesh.relay.test.js`: Peer-assisted relay for NAT traversal
+
+### On-Device ML Tests
+
+- `tests/unit/inference.load.test.js`: Model loading from OPFS
+- `tests/unit/inference.classify.test.js`: Intent classification accuracy
+- `tests/unit/inference.fallback.test.js`: Graceful degradation without WebGPU
+

@@ -207,6 +207,39 @@
 - Significant speedup for vector operations
 - Automatic fallback to CPU
 
+### **ML Inference Pipeline (SOTA Enhancement)**
+
+webgpu.adapter.js is expanded to support on-device model inference:
+
+**Model Loading:**
+- `async loadModel(modelPath)`: Load ONNX/WASM model from OPFS `/models/` directory
+- Models stored as binary files in OPFS, managed by VFS
+- Lazy loading: models loaded only when Tier 3 NLP is triggered
+
+**Inference Execution:**
+- `async runInference(model, input)`: Execute model forward pass on WebGPU
+- Input: tokenized text as Float32Array
+- Output: classification logits or embedding vectors
+- Falls back to WASM (ONNX Runtime Web) if WebGPU unavailable
+
+**Model Management:**
+- `getAvailableModels()`: List models in OPFS `/models/`
+- `deleteModel(modelPath)`: Remove model to free storage
+- `getModelMetadata(modelPath)`: Return model size, type, version
+
+**Supported Model Types:**
+| Model | Task | Size | Latency |
+|-------|------|------|---------|
+| Intent classifier | Intent classification | ~2-5MB | <100ms |
+| Entity extractor | Named entity recognition | ~5-10MB | <150ms |
+| Sentiment analyzer | Sentiment classification | ~2-5MB | <50ms |
+
+**Key Behaviors:**
+- All inference runs off main thread (in inference.worker.js or WebGPU compute)
+- Models distributed via mesh as part of sfti.iso
+- No cloud dependency: all models run on-device
+- Falls back gracefully: WebGPU → WASM → CPU (nlp.worker.js statistical methods)
+
 ---
 
 ### **src/adapters/web/indexeddb.adapter.js**

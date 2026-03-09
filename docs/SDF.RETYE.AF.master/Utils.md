@@ -98,11 +98,19 @@
 ---
 
 ### **src/utils/crypto.js**
-**Purpose:** Crypto helpers  
+**Purpose:** Crypto helpers
 **Functions:**
 - `randomBytes(length)`:
   - crypto.getRandomValues()
 - `randomInt(min, max)`:
   - Crypto-secure random integer
+- `async encryptData(data, key)`:
+  - Encrypt data using WebCrypto API AES-GCM
+  - Returns: { ciphertext, iv } (ArrayBuffer + initialization vector)
+- `async decryptData(encrypted, key)`:
+  - Decrypt AES-GCM encrypted data using WebCrypto API
+  - Input: { ciphertext, iv } + CryptoKey
+  - Returns: decrypted ArrayBuffer
 **Key Behaviors:**
 - Crypto-grade randomness
+- AES-GCM encryption/decryption via WebCrypto API

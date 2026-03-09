@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-Statik.ai is a **Progressive Web App (PWA)** running in Safari/WebKit on iOS. This document covers iOS-specific capabilities, limitations, workarounds, and optimization strategies for iOS 26.3+.
+Statik.ai is a **Progressive Web App (PWA)** running in Safari/WebKit on iOS. This document covers iOS-specific capabilities, limitations, workarounds, and optimization strategies for iOS 26.3+, including iOS 26.3 Developer Beta specifics.
 
 **Critical Reality Check:**
 - ✅ PWAs on iOS CAN: Run offline, use OPFS storage, send push notifications (if added to home screen), access sensors
@@ -48,6 +48,37 @@ Statik.ai is a **Progressive Web App (PWA)** running in Safari/WebKit on iOS. Th
 - **Stable:** iOS 26.2.1 (released January 2026)
 - **Beta:** iOS 26.3 Developer Beta 3 (build 23D5114d)
 - **Next:** iOS 26.4 expected March/April 2026
+
+### iOS 26.3 Developer Beta -- New Web APIs
+
+**Build:** 23D5114d (Developer Beta 3)
+
+iOS 26.3 Developer Beta expands web platform capabilities significantly. The following APIs are newly available or enhanced for PWAs:
+
+**Confirmed Available:**
+- **Enhanced OPFS:** Improved performance for synchronous access handles in Worker context
+- **WebRTC improvements:** Better ICE candidate gathering, reduced connection setup time
+- **Web Push enhancements:** More reliable push delivery for home-screen PWAs
+- **DeviceMotionEvent:** No longer requires user gesture to start (previously required)
+- **Screen Wake Lock API:** Prevent screen dimming during active sessions
+- **Web Locks API:** Coordinate resource access across tabs/workers
+- **Compression Streams API:** Native gzip/deflate for data transfer
+- **File System Access API (partial):** Enhanced showOpenFilePicker for ISO loading
+
+**PWA Limitations Updated for 26.3:**
+| Previous Limitation | 26.3 Status |
+|---------------------|-------------|
+| No background processing | Still limited -- only Background Fetch for large downloads |
+| No Bluetooth Web API | Still unavailable |
+| No USB/NFC Web API | Still unavailable |
+| 7-day storage eviction | Still present -- mitigated via mesh state preservation |
+| No Siri/Shortcuts integration | Still unavailable (expected 26.4+) |
+| Push notifications require Home Screen | Still required |
+
+**Adapter Updates Required:**
+- `hardware.adapter.js`: Add Screen Wake Lock, update DeviceMotion (no gesture needed)
+- `storage.adapter.js`: Use enhanced OPFS sync access handles in workers
+- `network.adapter.js`: Use Compression Streams for mesh data transfer
 
 ### iOS 26 Key Features
 

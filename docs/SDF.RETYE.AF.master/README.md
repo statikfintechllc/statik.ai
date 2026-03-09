@@ -36,7 +36,7 @@ Statik.ai is an experimental AI system designed to run entirely in your web brow
 - **Rule-based pattern matching** (not LLMs)
 - **Delta learning** (confidence adjustments based on outcomes)
 - **Autonomous goal generation** (proactive, not just reactive)
-- **Distributed cognition** (17 specialized units working together)
+- **Distributed cognition** (19 specialized units working together)
 
 Think of it as a **cognitive architecture** rather than a chatbot—inspired by cognitive science, not just scaled transformers.
 
@@ -71,7 +71,7 @@ Input → pce.u (perception) → as.u (attention) → ti.u (temporal)
          cm.u (memory) ← dbt.u (learning) ← ee.u (evaluation)
 ```
 
-### The 17 Units
+### The 19 Units
 
 | Unit | Purpose |
 |------|---------|
@@ -364,7 +364,7 @@ Edit `configs/constraints.json`:
 ## Roadmap
 
 ### v0.1 (Current) - MVP
-- [x] Core 17 units operational
+- [x] Core 19 units operational
 - [x] Basic learning (delta-based)
 - [x] Memory persistence (IndexedDB)
 - [x] PWA installable

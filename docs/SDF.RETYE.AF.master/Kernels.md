@@ -16,7 +16,7 @@
 - Single source of truth for system state
 - Coordinates unit initialization order
 - Handles global errors
-- Never throws (logs and recovers)
+- Never throws during normal operation (logs and recovers). Boot failure is the sole exception where errors propagate to bootstrap/recover.js.
 
 ---
 
@@ -63,6 +63,8 @@
   - If unit unresponsive >5s → attempt restart
   - If restart fails 3x → disable unit
 - `reportCrash(unitId, error)`: Log crash to telemetry
+**State:**
+- `failures`: Map<unitId, failureCount> (initialized empty in constructor)
 **Key Behaviors:**
 - Runs in background (setInterval every 5s)
 - Isolates failures (one unit crash doesn't kill system)

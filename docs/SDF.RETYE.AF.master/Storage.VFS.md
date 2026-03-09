@@ -61,8 +61,18 @@
     {
       version: 1,
       upgrade: (db) => {
+        // statik_memory stores
         db.createObjectStore('episodes', {keyPath: 'id'});
         db.createObjectStore('concepts', {keyPath: 'id'});
+        db.createObjectStore('skills', {keyPath: 'id'});
+        db.createObjectStore('patterns', {keyPath: 'id'});
+        // statik_state stores
+        db.createObjectStore('unit_states', {keyPath: 'id'});
+        db.createObjectStore('kernel_state', {keyPath: 'id'});
+        // statik_logs stores
+        db.createObjectStore('deltas', {keyPath: 'id'});
+        db.createObjectStore('errors', {keyPath: 'id'});
+        db.createObjectStore('actions', {keyPath: 'id'});
       }
     },
     {
@@ -376,3 +386,41 @@
 - Complete system in one file
 - Self-contained (includes everything)
 - Bootstraps from scratch
+
+---
+
+## SELF-MODIFICATION SAFETY RAILS
+
+All VFS write operations that modify source code MUST follow these safety procedures. See `Security.md` for the full security specification.
+
+### Pre-Modification (Mandatory)
+
+1. **Mandatory snapshot:** Create sfti.iso snapshot before ANY source file write. Store in OPFS `/snapshots/`. Keep minimum 5 snapshots.
+2. **File backup:** Copy current version of the file to OPFS `/vfs/.versions/{filename}.{timestamp}`
+3. **Lock file:** Acquire Web Lock (`navigator.locks.request`) to prevent concurrent modifications
+
+### Validation (Mandatory)
+
+1. **Syntax validation:** Parse modified JavaScript with `new Function(code)` to detect syntax errors
+2. **Size check:** Modified file must be <1MB
+3. **Prohibited patterns check:** Scan for:
+   - `eval()` calls outside Worker context
+   - `document.write()`
+   - External URL fetches (only mesh/VFS allowed)
+   - Private key access attempts
+4. **Constraint validation:** Pass through ec.u constraint check via bus
+
+### Post-Modification
+
+1. **Code signing:** Calculate SHA-256 hash, sign with instance signing key
+2. **Manifest update:** Update `file-manifest.json` with new hash and signature
+3. **Worker sandbox test:** Import module in Worker context, verify it exports expected interface
+4. **Hot reload:** If sandbox passes, hot reload on main thread with error boundary
+5. **Rollback trigger:** If main thread throws within 5 seconds of reload, automatic rollback to pre-snapshot
+
+### Multi-Level Undo
+
+- Keep last 10 versions per file in OPFS `/vfs/.versions/`
+- Configurable max via `configs/constraints.json`
+- Versions pruned FIFO when limit exceeded
+- Full VFS rollback via sfti.iso snapshot restore

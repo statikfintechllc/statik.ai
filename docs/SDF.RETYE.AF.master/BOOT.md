@@ -827,7 +827,7 @@ export class Bus {
   
   emit(topic, payload) {
     // Validate payload
-    const validation = this.validator.validate(topic, payload);
+    const validation = this.validator.validate(message, schemaName);
     if (!validation.valid) {
       console.error('[bus] Invalid message:', validation.errors);
       return;
@@ -1002,7 +1002,7 @@ async startLifecycle() {
   
   const { Lifecycle } = await import('./lifecycle.js');
   this.lifecycle = new Lifecycle(this.bus, this.registry, this.state);
-  await this.lifecycle.start();
+  await this.lifecycle.initializeUnits();
   
   console.log('[kernel] Lifecycle started');
 }
@@ -1019,7 +1019,7 @@ export class Lifecycle {
     this.unitStates = new Map(); // id → 'init'|'running'|'stopped'|'error'
   }
   
-  async start() {
+  async initializeUnits() {
     console.log('[lifecycle] Initializing units...');
     
     // Get units sorted by priority
@@ -1956,6 +1956,29 @@ console.log({
 **Failure handling:** Every phase has error boundary → safe mode
 
 **Performance:** Optimized for warm starts (cached state), graceful degradation
+
+---
+
+## PWA Update Lifecycle
+
+When the Service Worker detects updated source files (from VFS self-modification or mesh sync):
+
+### Update Strategy
+
+1. **No skipWaiting:** SW updates do NOT call `skipWaiting()` to avoid mid-session state corruption
+2. **Pending update:** New SW version installed but waits for all tabs to close
+3. **User notification:** ui.u displays "Update available -- restart to apply" banner
+4. **Graceful restart:** User-initiated restart applies the new SW version
+5. **VFS-triggered updates:** When VFS writes new sw.js, the browser detects the change on next navigation/check
+
+### OPFS Fallback
+
+If OPFS is unavailable (older iOS versions, certain browser configs):
+1. **Detect at boot:** detect.js checks `navigator.storage.getDirectory()`
+2. **Fallback to IndexedDB:** Store source files as blobs in IndexedDB
+3. **Reduced capacity:** No synchronous file access in workers, slightly degraded performance
+4. **VFS still works:** All VFS operations route through IndexedDB adapter instead of OPFS
+5. **User notification:** Inform user that OPFS is unavailable and system is running in compatibility mode
 
 ---
 

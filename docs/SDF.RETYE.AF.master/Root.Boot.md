@@ -11,12 +11,12 @@
 - Loads initial HTML structure (minimal, just container divs)
 - Links to manifest.json for PWA configuration
 - Registers service worker (sw.js)
-- Imports kernel.u.js as ES module to bootstrap system
+- Imports bootstrap/boot.js as ES module entry point
 - Provides mounting points: `<div id="app">`, `<div id="inspector">`, `<div id="debug">`
 - Includes meta tags for iOS standalone mode
 - NO inline JavaScript (all in modules)
 **Key Behaviors:**
-- On load: registers service worker, imports kernel, calls `kernel.boot()`
+- On load: registers service worker, imports boot.js, calls `boot()` which orchestrates detect → hydrate → kernel init
 - Minimal DOM (UI built by ui.u.js dynamically)
 
 ---

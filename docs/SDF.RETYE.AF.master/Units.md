@@ -2,7 +2,7 @@
 
 ### **src/units/pce.u.js**
 **Purpose:** Perception & Context Encoder - processes all inputs into ContextFrames  
-**Talks To:** bus.u (emits to 'context.new'), as.u (receives filtered), ui.u (receives input events), adapters/ios/hardware  
+**Talks To:** bus.u (emits to 'context.new', 'user.correction'), as.u (receives filtered), ui.u (receives input events), adapters/ios/hardware  
 **Functions:**
 - `async init()`:
   - Subscribe to input events: 'ui.input', 'sensor.data', 'network.response'
@@ -28,6 +28,7 @@
 - Fast processing (<5ms per input)
 - No blocking operations
 - Novelty detection prevents processing spam
+- Detects corrective feedback from user (e.g., "no", "that's wrong", "I meant...") and emits 'user.correction' to the bus for dbt.u consumption
 
 ---
 
@@ -142,11 +143,38 @@
 - If autonomy=high: generates background goals proactively
 - Never blocks (goals queued, executed async)
 
+### **Autonomous Goal Planning (Enhanced)**
+
+**Long-term goal planning:**
+- gm.u maintains a goal hierarchy: strategic (days/weeks) → tactical (hours) → reactive (seconds)
+- Strategic goals generated from pattern analysis of user behavior over time
+- Example: If user frequently queries at 9am, generate anticipatory goal: "Prepare morning context summary"
+
+**Exploratory goals (detailed):**
+When autonomy_level = 'high':
+- Explore new pattern combinations from existing high-confidence patterns
+- Test new response templates and measure user satisfaction
+- Discover correlations between different memory domains
+- Propose new capabilities based on observed usage patterns
+- All exploratory results logged to dbt.u; failures reduce exploration probability
+
+**Goal persistence:**
+- All goals serialized to IndexedDB `statik_state.goals` on creation
+- On hydration (bootstrap/hydrate.js): reload goal queue from IndexedDB
+- In-progress goals resumed where they left off
+- Expired goals (past deadline) cleaned up during hydration
+
+**Autonomous task discovery:**
+- gm.u periodically (every 10 minutes) analyzes recent dbt.u deltas
+- Identifies patterns with rapidly dropping confidence → generates corrective goal
+- Identifies patterns with consistently high confidence → proposes promotion
+- Identifies memory consolidation opportunities → generates cleanup goal
+
 ---
 
 ### **src/units/nlp.u.js**
 **Purpose:** Natural Language Processor - parse and compose language  
-**Talks To:** bus.u (subscribes 'intent.parse', 'response.compose', emits 'intent.parsed', 'response.text'), workers/nlp.worker.js  
+**Talks To:** bus.u (subscribes 'nlp.parse', 'context.temporal', 'learning.pattern_update', 'response.compose', emits 'intent.parsed', 'response.text'), workers/nlp.worker.js  
 **Functions:**
 - `async init()`:
   - Subscribe to parse/compose requests
@@ -182,11 +210,57 @@
 - Template-based generation (not generative)
 - Unknown intents → fallback: "I don't understand"
 
+### **Multi-Style NLP Architecture (SOTA Enhancement)**
+
+nlp.u operates as a 3-tier NLP system. NO LLM API wrappers. The system IS the intelligence.
+
+**Tier 1 -- Fast Path (Regex/Rule Engine, <5ms):**
+- Expanded regex patterns beyond the 5 defaults
+- Weighted multi-rule scoring when multiple patterns match
+- Context-aware pattern selection based on prior chat history (ti.u temporal context)
+- Patterns grow via delta learning (dbt.u): successful matches gain confidence, failures lose it
+- Handles ~80% of inputs at <5ms latency
+
+**Tier 2 -- Medium Path (Statistical NLP, <50ms):**
+- N-gram models built from prior interactions stored in cm.u
+- TF-IDF with learned weights (weights adjusted via dbt.u deltas)
+- Conditional probability chains for intent sequence prediction
+- Handles ambiguous inputs where regex confidence is below 0.6
+- Runs in nlp.worker.js (off main thread)
+
+**Tier 3 -- Deep Path (On-Device ML via WebGPU, <200ms):**
+- Small task-specific models: intent classification, entity extraction, sentiment analysis
+- Runs via WebGPU compute shaders (webgpu.adapter.js) or ONNX Runtime Web/WASM
+- Model storage: OPFS `/models/` directory
+- Model execution: inference.worker.js (WASM-based, off main thread)
+- NO cloud, NO API, on-device only
+- Handles the hardest inputs as fallback when Tier 1+2 confidence < 0.4
+
+**Learning Loop:**
+All three tiers feed results to dbt.u for confidence adjustment. Over time:
+- High-confidence deep path patterns promoted to statistical path
+- High-confidence statistical patterns promoted to regex fast path
+- System progressively gets FASTER without losing accuracy
+- The more it's used, the more inputs resolve at Tier 1 (fast path)
+
+**Conversation State Machine:**
+- Multi-turn dialogue tracking via ti.u session context
+- Context window: last 10 turns maintained in RAM
+- Entity coreference resolution: "it", "that", "the one" → resolve to prior entities
+- Intent disambiguation: when multiple patterns match, use temporal context + memory to select
+- Slot filling: build up intent across multiple turns ("I want to... [incomplete]" → "transfer" → "[amount]" → "[to whom]")
+
+**Bus Topics for Multi-Style NLP:**
+- `nlp.parse` → nlp.u routes to appropriate tier
+- `inference.request` → nlp.u sends to inference.worker for Tier 3
+- `inference.result` → nlp.u receives Tier 3 results
+- `nlp.parsed` → final result emitted regardless of which tier resolved it
+
 ---
 
 ### **src/units/cm.u.js**
 **Purpose:** Core Memory - episodic, semantic, procedural storage  
-**Talks To:** bus.u (subscribes 'memory.store', 'memory.retrieve', emits 'memory.result'), workers/memory.worker.js, storage/db.js  
+**Talks To:** bus.u (subscribes 'memory.store', 'memory.retrieve', 'context.temporal', emits 'memory.result'), workers/memory.worker.js, storage/db.js  
 **Functions:**
 - `async init()`:
   - Open IndexedDB (statik_memory)
@@ -232,11 +306,11 @@
 
 ### **src/units/dbt.u.js**
 **Purpose:** Delta & Learning Ledger - tracks changes, enables learning  
-**Talks To:** bus.u (subscribes 'pattern.result', 'skill.result', 'action.outcome'), storage/db.js (statik_logs), nlp.u, cm.u, ee.u  
+**Talks To:** bus.u (subscribes 'error.detected', 'success.confirmed', 'user.correction'), storage/db.js (statik_logs), nlp.u, cm.u, ee.u  
 **Functions:**
 - `async init()`:
   - Open IndexedDB (statik_logs database, deltas table)
-  - Subscribe to: 'pattern.result', 'skill.result', 'action.outcome'
+  - Subscribe to: 'error.detected', 'success.confirmed', 'user.correction'
   - Load recent deltas into memory cache
 - **DELTA LOGGING:**
   - `logDelta(deltaType, before, after, evidence, reason)`:
@@ -303,7 +377,7 @@
 
 ### **src/units/ee.u.js**
 **Purpose:** Evaluation & Error - detects when predictions fail  
-**Talks To:** bus.u (subscribes 'action.executed', 'prediction.made', emits 'error.detected', 'success.confirmed'), dbt.u, gm.u, ie.u  
+**Talks To:** bus.u (subscribes 'action.completed', emits 'error.detected', 'success.confirmed'), dbt.u, gm.u, ie.u  
 **Functions:**
 - `async init()`:
   - Subscribe to action results
@@ -389,9 +463,10 @@
     ```
   - Store in capability registry
 - `queryCapability(capability)`:
+  - Internal handler for 'capability.query' bus messages
   - Check if system can do X
   - Return: {available, limitations, confidence}
-  - Used by ie.u before attempting actions
+  - Responds via 'capability.response' on the bus (bus RPC pattern)
 - **LIMITATION AWARENESS:**
   - `getSystemLimitations()`:
     - Return list of known limitations:
@@ -427,14 +502,16 @@
     }
     ```
   - Used by ui.u for status display
-- **HONESTY ENFORCEMENT:**
-  - `canDo(action)`:
+- **HONESTY ENFORCEMENT (via bus RPC):**
+  - On receiving 'capability.query' from bus:
     - Check capability registry
-    - If not available → return false
-    - Used by ie.u and nlp.u to avoid hallucinations
+    - If not available -> emit 'capability.response' with {available: false, reason: ...}
+    - If available -> emit 'capability.response' with {available: true, limitations: ...}
+    - All callers (ie.u, nlp.u) use bus request/response pattern, NOT direct function calls
   - Example:
     - User: "Show me a picture of a cat"
-    - sa.u.canDo('generate_image') → false
+    - ie.u emits 'capability.query' with {action: 'generate_image'}
+    - sa.u responds via 'capability.response' with {available: false}
     - Response: "I can't generate images. I'm client-side only."
 **State:**
 - `capabilityRegistry`: Map<capability, metadata>
@@ -445,12 +522,13 @@
 - Provides honest refusals (not hallucinations)
 - Tracks performance confidence
 - Updates as capabilities change (new units, features)
+- All capability queries handled via bus RPC (request/response pattern), no direct function calls
 
 ---
 
 ### **src/units/ie.u.js**
 **Purpose:** Intent Execution - turns goals into actions  
-**Talks To:** bus.u (subscribes 'goal.execute', emits 'action.executed'), sa.u (checks capabilities), ec.u (validates actions), ui.u, storage/db.js, adapters/*  
+**Talks To:** bus.u (subscribes 'goal.execute', emits 'action.completed'), sa.u (queries via 'capability.query' bus RPC), ec.u (validates actions), ui.u, storage/db.js, adapters/*  
 **Functions:**
 - `async init()`:
   - Subscribe to 'goal.execute'
@@ -458,7 +536,7 @@
   - Initialize execution queue
 - **ACTION EXECUTION:**
   - `async executeGoal(goal)`:
-    - 1. Validate with sa.u (can system do this?)
+    - 1. Query sa.u via bus RPC 'capability.query' (can system do this?)
     - 2. Check ec.u (is this allowed?)
     - 3. Predict outcome (for ee.u)
     - 4. Execute action
@@ -1263,3 +1341,38 @@
 - NAT traversal (works behind routers)
 - Resilient (auto-reconnect)
 - Efficient (direct data channels, no proxies)
+
+---
+
+### **src/units/deploy.u.js**
+**Purpose:** Code distribution, update propagation, version consensus
+**Talks To:** bus.u (subscribes 'deploy.received', emits 'deploy.update'), vfs, mesh.u, sync.u
+**Full Specification:** See `SelfHost.md` for complete deploy.u specification.
+
+**Key Functions:**
+- `detectChange(filePath, newHash)`: Detect VFS modifications, increment version vector
+- `propagateUpdate(changedFiles, versionVector)`: Broadcast changes to mesh peers
+- `receiveUpdate(update)`: Apply incoming peer updates with conflict resolution
+- `resolveConflict(filePath, localVersion, remoteVersion)`: Version vector comparison, `.conflict` file preservation
+
+**Key Behaviors:**
+- Bandwidth-efficient: only changed files transmitted
+- Transactional: all files in an update applied atomically or not at all
+- Conflict-aware: divergent changes never silently overwritten
+
+---
+
+### **src/units/dns.u.js**
+**Purpose:** Mesh-internal name resolution, maps human-readable names to peer IDs
+**Talks To:** bus.u (subscribes 'dns.resolve', emits 'dns.resolved'), disc.u, mesh.u
+**Full Specification:** See `SelfHost.md` for complete dns.u specification.
+
+**Key Functions:**
+- `resolve(name)`: Local-first name resolution, mesh query fallback
+- `register(name, instanceId, endpoint)`: Register name in local table + broadcast to mesh
+- `unregister(name)`: Remove name from mesh
+
+**Key Behaviors:**
+- Local-first resolution (check own table before querying mesh)
+- TTL-based expiration (5 minutes without heartbeat)
+- No central authority: every instance maintains its own name table

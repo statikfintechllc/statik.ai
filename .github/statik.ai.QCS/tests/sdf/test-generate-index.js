@@ -17,9 +17,9 @@ const {
   SDF_ROOT,
 } = require('../../scripts/generate-sdf-index.js');
 
-const EXPECTED_DOC_COUNT      = 22;
-const MIN_FILE_MAPPINGS       = 100; // At least 100 of the 113 mapped
-const EXPECTED_KNOWN_ISSUES   = 17;
+const EXPECTED_DOC_COUNT      = 25;
+const MIN_FILE_MAPPINGS       = 100; // At least 100 of the 116 mapped
+const EXPECTED_KNOWN_ISSUES   = 25;
 
 const EXPECTED_LAYERS = [
   'root', 'bootstrap', 'config', 'schema', 'kernel', 'bus',
@@ -52,7 +52,7 @@ for (const doc of SDF_DOCS) {
   assert.ok(DOC_META[doc].type, `DOC_META["${doc}"] missing "type"`);
   assert.ok(DOC_META[doc].scope, `DOC_META["${doc}"] missing "scope"`);
 }
-console.log('  ✓ DOC_META has type + scope for all 22 docs');
+console.log('  ✓ DOC_META has type + scope for all 25 docs');
 
 // ── 3. FILE_MAPPINGS structure ──────────────────────────────────────────────
 assert.ok(Array.isArray(FILE_MAPPINGS), 'FILE_MAPPINGS must be an array');
@@ -112,10 +112,13 @@ assert.strictEqual(
 );
 for (let i = 0; i < KNOWN_ISSUES.length; i++) {
   const ki = KNOWN_ISSUES[i];
+  assert.ok(ki.id, `KNOWN_ISSUES[${i}] missing "id"`);
   assert.ok(ki.severity, `KNOWN_ISSUES[${i}] missing "severity"`);
-  assert.ok(ki.issue, `KNOWN_ISSUES[${i}] missing "issue"`);
-  assert.ok(ki.docs, `KNOWN_ISSUES[${i}] missing "docs"`);
-  assert.ok(Array.isArray(ki.docs), `KNOWN_ISSUES[${i}] "docs" must be an array`);
+  assert.ok(ki.status, `KNOWN_ISSUES[${i}] missing "status"`);
+  assert.ok(ki.issue || ki.description, `KNOWN_ISSUES[${i}] missing "issue" or "description"`);
+  assert.ok(ki.docs || ki.files, `KNOWN_ISSUES[${i}] missing "docs" or "files"`);
+  const docOrFiles = ki.docs || ki.files;
+  assert.ok(Array.isArray(docOrFiles), `KNOWN_ISSUES[${i}] "docs"/"files" must be an array`);
   assert.ok(
     ['high', 'medium', 'low'].includes(ki.severity),
     `KNOWN_ISSUES[${i}] has invalid severity "${ki.severity}"`

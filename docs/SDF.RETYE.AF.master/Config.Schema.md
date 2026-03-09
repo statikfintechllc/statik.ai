@@ -36,7 +36,7 @@
   "indexeddb": true,
   "workers": true,
   "storage_quota_mb": 500,
-  "ios_version": "18.3",
+  "ios_version": "26.3",
   // ... all detected features
 }
 ```
@@ -165,7 +165,7 @@
   "type": "object",
   "required": ["action_type", "target"],
   "properties": {
-    "action_type": {"enum": ["ui_update", "storage_write", "network_call"]},
+    "action_type": {"enum": ["ui.update", "storage.write", "network.call", "eval.code"]},
     "target": {"type": "string"},
     "payload": {"type": "object"}
   }

@@ -15,7 +15,7 @@ Complete API reference for Statik.ai cognitive runtime. Covers:
 - **External APIs:** User/developer interaction interfaces
 - **Platform APIs:** Adapters, workers, runtime components
 
-**Note:** For detailed implementation specs, see corresponding .md files (Units.md, Bus_RunTime.md, etc.)
+**Note:** For detailed implementation specs, see corresponding .md files (Units.md, Bus.RunTime.md, etc.)
 
 ---
 
@@ -2160,9 +2160,9 @@ Future deprecations will be documented here with:
 ## See Also
 
 - **[Units.md](../Units.md)** - Detailed unit specifications
-- **[Bus_RunTime.md](../Bus_RunTime.md)** - Message bus and runtime details
+- **[Bus.RunTime.md](../Bus.RunTime.md)** - Message bus and runtime details
 - **[Adapters.md](../Adapters.md)** - Platform adapter specs
-- **[Storage_VFS.md](../Storage_VFS.md)** - Storage and VFS implementation
+- **[Storage.VFS.md](../Storage.VFS.md)** - Storage and VFS implementation
 - **[BOOT.md](BOOT.md)** - Boot sequence documentation
 - **[MESSAGES.md](MESSAGES.md)** - Message flow and learning
 - **[STORAGE.md](STORAGE.md)** - Storage architecture

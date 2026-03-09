@@ -168,4 +168,162 @@
 
 ---
 
-**Token check: Continue?**
+## CANONICAL TOPIC REGISTRY
+
+**Authority:** This registry is the single source of truth for all message bus topics. If any other SDF document conflicts with this registry, this registry wins. All units MUST subscribe/emit using these exact topic names.
+
+**Last Updated:** March 9, 2026
+
+### Cognitive Pipeline Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `ui.input` | ui.u | pce.u | - | high |
+| `context.new` | pce.u | as.u | context.schema.json | normal |
+| `context.salient` | as.u | ti.u | context.schema.json | normal |
+| `context.temporal` | ti.u | nlp.u, cm.u, gm.u | context.schema.json | normal |
+| `nlp.parse` | various | nlp.u | intent.schema.json | normal |
+| `nlp.parsed` | nlp.u | ie.u, ui.u, various | intent.schema.json | normal |
+| `response.compose` | various | nlp.u | - | normal |
+| `ui.render` | nlp.u, ie.u | ui.u | - | high |
+| `user.correction` | pce.u | dbt.u | - | high |
+
+### Memory Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `memory.store` | various | cm.u | memory.schema.json | normal |
+| `memory.retrieve` | various | cm.u (RPC) | memory.schema.json | normal |
+| `memory.stored` | cm.u | various | - | low |
+
+### Goal & Action Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `goal.new` | gm.u, ee.u, hc.u | ie.u | - | normal |
+| `action.validate` | ie.u | ec.u | action.schema.json | normal |
+| `action.allowed` | ec.u | ie.u | - | normal |
+| `action.denied` | ec.u | ie.u | - | high |
+| `action.completed` | ie.u | ee.u | action.schema.json | normal |
+| `capability.query` | ie.u | sa.u (RPC) | - | normal |
+
+### Learning Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `error.detected` | ee.u | dbt.u, gm.u | - | high |
+| `success.confirmed` | ee.u | dbt.u | - | normal |
+| `learning.delta` | dbt.u | telemetry.u | - | low |
+| `learning.pattern_update` | dbt.u | nlp.u | - | normal |
+
+### System Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `system.ready` | kernel | all | - | high |
+| `system.shutdown` | kernel | all | - | high |
+| `system.pause` | controls | kernel, scheduler | - | high |
+| `system.resume` | controls | kernel, scheduler | - | high |
+| `homeostasis.action` | hc.u | various | - | normal |
+| `network.status` | network.adapter | various | - | normal |
+
+### P2P & Mesh Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `instance.discovered` | disc.u | mesh.u, sync.u | - | normal |
+| `peer.connected` | mesh.u | disc.u, sync.u | - | normal |
+| `peer.disconnected` | mesh.u | disc.u, sync.u | - | normal |
+| `sync.request` | sync.u | mesh.u | - | normal |
+| `sync.complete` | sync.u | cm.u | - | normal |
+
+### Self-Hosting Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `deploy.update` | deploy.u | mesh.u, vfs | - | high |
+| `deploy.received` | mesh.u | deploy.u, vfs | - | high |
+| `dns.resolve` | disc.u | dns.u (RPC) | - | normal |
+| `dns.resolved` | dns.u | disc.u | - | normal |
+
+### Inference Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `inference.request` | nlp.u | inference.worker | - | normal |
+| `inference.result` | inference.worker | nlp.u | - | normal |
+
+### Debug Topics
+
+| Topic | Producer(s) | Consumer(s) | Schema | Priority |
+|-------|------------|-------------|--------|----------|
+| `bridge.command` | bridge.u | various (routed) | - | high |
+| `dev.inject` | dev.u | pce.u, bus.u | - | high |
+| `bus.dead_letter` | router.js | telemetry.u, dev.u | - | low |
+
+---
+
+## DEAD LETTER QUEUE
+
+When a message cannot be delivered (no subscribers, all subscribers errored, or message expired), the bus MUST NOT silently drop it. Instead:
+
+1. Route undeliverable messages to the `bus.dead_letter` topic
+2. Include the original topic, payload, timestamp, and failure reason
+3. telemetry.u logs all dead letters for diagnostics
+4. dev.u surfaces dead letters in developer mode for debugging
+
+**Dead Letter Message Format:**
+```json
+{
+  "original_topic": "string",
+  "original_payload": {},
+  "timestamp": "number",
+  "failure_reason": "no_subscribers | all_errored | expired | schema_invalid",
+  "attempts": "number"
+}
+```
+
+---
+
+## MESSAGE PERSISTENCE
+
+For crash recovery, the bus MUST persist critical messages:
+
+1. Messages on `high` priority channels are journaled to IndexedDB (`statik_logs.bus_journal`)
+2. On crash recovery, unprocessed high-priority messages are replayed in order
+3. Journal is truncated after successful processing
+4. Maximum journal size: 1000 entries (oldest evicted)
+
+---
+
+## MESSAGE DEDUPLICATION
+
+To prevent duplicate processing (critical for P2P relay scenarios where the same message may arrive from multiple mesh peers):
+
+1. Every message has a unique `message_id` (generated by producer)
+2. The bus maintains a dedup cache of the last 10,000 message IDs (LRU)
+3. Duplicate messages (same `message_id`) are silently dropped
+4. Dedup cache is NOT persisted across reboots (only protects within a session)
+
+---
+
+## ORDERING GUARANTEES
+
+1. **Within a single priority level:** FIFO ordering guaranteed
+2. **Across priority levels:** High before Normal before Low (preemptive)
+3. **Across producers:** No global ordering (messages from different units may interleave)
+4. **RPC responses:** Correlated by ID, not by ordering
+
+---
+
+## VALIDATOR FUNCTION SIGNATURE
+
+**Canonical signature:** `validate(message, schemaName)`
+
+- `message`: The full message object to validate
+- `schemaName`: The schema name from the topic registry (e.g., `context.schema.json`)
+- Returns: `{valid: true/false, errors: []}`
+
+This resolves the M3 contradiction between BOOT.md (`validate(topic, payload)`) and this document. BOOT.md should use this signature.
+
+This file is now complete.

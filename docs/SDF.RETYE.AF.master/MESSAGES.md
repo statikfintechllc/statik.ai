@@ -25,6 +25,8 @@ This document defines the **cognitive message architecture** that enables Statik
 - **Asymmetric rates:** Faster to doubt than trust (safety-first)
 - **Promotion:** Patterns >0.85 for >7 days become "trusted"
 
+> **Topic Authority:** The canonical topic registry lives in `Bus.RunTime.md`. If topic names in this document conflict with that registry, the registry is authoritative.
+
 ---
 
 ## Table of Contents
@@ -586,7 +588,7 @@ extractEntities(text, pattern) {
 async composeResponse(intent, slots, context) {
   // 1. Retrieve relevant memories
   const query = this.buildMemoryQuery(intent, slots);
-  const memories = await cm.retrieveMemories(query, 5);
+  const memories = await bus.request('memory.retrieve', { query, limit: 5 });
   
   // 2. Get response template
   const template = this.responseTemplates.get(intent.type);
@@ -839,6 +841,8 @@ export default class DeltaLearningUnit {
   }
 }
 ```
+
+**user.correction flow:** When pce.u detects corrective language patterns (e.g., "no", "that's wrong", "I meant...") in user input, it emits `user.correction` with the original context and the correction. dbt.u consumes this to decrease confidence in the matched pattern.
 
 ---
 

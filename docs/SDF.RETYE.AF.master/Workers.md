@@ -129,4 +129,48 @@
 
 ---
 
-**Token check: ~4000 tokens. Continue with adapters, storage, vfs, protocols, ui, utils?**
+### **src/workers/inference.worker.js**
+**Purpose:** On-device ML model inference without blocking main thread
+**Talks To:** Main thread (postMessage/onmessage), OPFS (model files)
+**Functions:**
+- `onmessage(event)`:
+  - Receive inference task from main thread
+  - Load model if not cached
+  - Execute inference
+  - postMessage result back
+- **INFERENCE TASKS:**
+  - `load_model`:
+    - Input: model path in OPFS
+    - Process: Load ONNX model via ONNX Runtime Web (WASM backend)
+    - Output: model ID for subsequent inference calls
+    - Cache: Keep loaded models in Worker memory (LRU, max 3 models)
+  - `classify`:
+    - Input: model ID, tokenized text (Float32Array)
+    - Process: Run model forward pass
+    - Output: classification label + confidence score
+  - `extract_entities`:
+    - Input: model ID, tokenized text
+    - Process: Run NER model
+    - Output: array of { entity, type, start, end, confidence }
+  - `embed`:
+    - Input: model ID, tokenized text
+    - Process: Generate embedding vector
+    - Output: Float32Array embedding
+  - `unload_model`:
+    - Input: model ID
+    - Process: Free model from Worker memory
+    - Output: success
+- **BACKENDS:**
+  - Primary: ONNX Runtime Web with WASM backend
+  - Enhanced: ONNX Runtime Web with WebGPU backend (via webgpu.adapter)
+  - Fallback: Pure WASM execution if WebGPU unavailable
+- **PERFORMANCE:**
+  - Model load: ~100-500ms (cached after first load)
+  - Inference: <200ms per input
+  - Memory: ~50-200MB per loaded model
+  - LRU cache: evict least-recently-used model when memory pressure detected
+**Key Behaviors:**
+- Never blocks UI thread
+- Models loaded lazily (only when Tier 3 NLP triggered)
+- Graceful degradation: WebGPU → WASM → skip (use Tier 1/2 only)
+- Memory-aware: monitors Worker heap, unloads models when hc.u signals pressure

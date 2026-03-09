@@ -19,7 +19,8 @@ Statik.ai/
 │  ├─ units.registry.json
 │  ├─ capabilities.json
 │  ├─ constraints.json
-│  └─ defaults.json
+│  ├─ defaults.json
+│  └─ nlp-patterns-default.json
 │
 ├─ schemas/
 │  ├─ messages/
@@ -73,13 +74,16 @@ Statik.ai/
 │  │  ├─ dev.u.js
 │  │  ├─ bridge.u.js
 │  │  ├─ disc.u.js
-│  │  └─ mesh.u.js
+│  │  ├─ mesh.u.js
+│  │  ├─ deploy.u.js
+│  │  └─ dns.u.js
 │  │
 │  ├─ workers/
 │  │  ├─ cognition.worker.js
 │  │  ├─ memory.worker.js
 │  │  ├─ nlp.worker.js
-│  │  └─ compute.worker.js
+│  │  ├─ compute.worker.js
+│  │  └─ inference.worker.js
 │  │
 │  ├─ adapters/
 │  │  ├─ ios/
@@ -159,6 +163,10 @@ Statik.ai/
 │  ├─ MESSAGES.md
 │  ├─ STORAGE.md
 │  └─ IOS.md
+│
+├─ models/
+│
+├─ file-manifest.json
 │
 └─ sfti.iso
 ```

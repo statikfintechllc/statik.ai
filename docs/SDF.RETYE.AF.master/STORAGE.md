@@ -355,9 +355,9 @@ Complete mapping of every data type to storage tier:
 **Snapshots** (.iso files)
 ```
 /opfs/snapshots/
-  ├─ statik-20260207-120000.iso (35MB)
-  ├─ statik-20260207-150000.iso (36MB)
-  └─ statik-20260207-180000.iso (35MB)
+  ├─ sfti-20260207-120000.iso (35MB)
+  ├─ sfti-20260207-150000.iso (36MB)
+  └─ sfti-20260207-180000.iso (35MB)
 ```
 **Retention:** Last 5 snapshots (configurable)
 
@@ -586,9 +586,9 @@ self.addEventListener('message', async (event) => {
 │     └─ styles/
 │
 ├─ snapshots/            # System snapshots (35MB each)
-│  ├─ statik-20260207-120000.iso
-│  ├─ statik-20260207-150000.iso
-│  └─ statik-20260207-180000.iso
+│  ├─ sfti-20260207-120000.iso
+│  ├─ sfti-20260207-150000.iso
+│  └─ sfti-20260207-180000.iso
 │
 ├─ exports/              # User backups (25MB each)
 │  ├─ backup-20260207-manual.json
@@ -603,10 +603,18 @@ self.addEventListener('message', async (event) => {
 │  └─ audio/
 │     └─ recording-012.mp3 (3MB)
 │
+├─ models/               # On-device ML models (20MB)
+│  ├─ intent-classifier.onnx      # Intent classification model (~5MB)
+│  ├─ entity-extractor.onnx       # Named entity recognition (~10MB)
+│  ├─ sentiment-analyzer.onnx     # Sentiment analysis (~3MB)
+│  └─ model-manifest.json         # Model metadata and versions
+│
 └─ cache/                # Temporary files (safe to delete)
    ├─ worker-temp-*.bin
    └─ processing-*.tmp
 ```
+
+**Model Storage:** On-device ML models are stored in OPFS `/models/` directory. Models are managed by `webgpu.adapter.js` and executed in `inference.worker.js`. Models are distributed via the mesh as part of sfti.iso snapshots.
 
 ### OPFS Operations
 
@@ -626,6 +634,7 @@ export class OPFS {
       'memories/images',
       'memories/documents',
       'memories/audio',
+      'models',
       'cache'
     ]);
   }
@@ -942,8 +951,15 @@ export class VFS {
   }
   
   async loadFromServer() {
-    const manifest = await fetch('/file-manifest.json').then(r => r.json());
-    
+    // Load file manifest from OPFS (`/vfs/file-manifest.json`) or generate from VFS tree if not present.
+    let manifest;
+    if (await opfs.exists('/vfs/file-manifest.json')) {
+      const raw = await opfs.readFile('/vfs/file-manifest.json');
+      manifest = JSON.parse(new TextDecoder().decode(raw));
+    } else {
+      manifest = await this.generateManifestFromVFS();
+    }
+
     for (const path of manifest.files) {
       const content = await fetch(path).then(r => r.text());
       this.tree.set(path, {
@@ -1201,7 +1217,7 @@ Compress with gzip (optional, 60% size reduction)
   ↓
 Calculate SHA-256 hash
   ↓
-Write to OPFS: /snapshots/statik-YYYYMMDD-HHMMSS.iso
+Write to OPFS: /snapshots/sfti-YYYYMMDD-HHMMSS.iso
   ↓
 [Cleanup]
   ↓
@@ -1642,7 +1658,7 @@ export class SnapshotManager {
     
     // 7. Save to OPFS
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `statik-${timestamp}.iso`;
+    const filename = `sfti-${timestamp}.iso`;
     await opfs.writeFile(`/snapshots/${filename}`, new TextEncoder().encode(JSON.stringify(iso)));
     
     const elapsed = performance.now() - startTime;
@@ -1735,7 +1751,10 @@ export class MigrationManager {
   }
   
   migrateToV1(db) {
-    // Create initial schema (already covered in db.js)
+    // Create initial v1 schema for all 3 databases:
+    //   statik_memory: episodes, concepts, skills, patterns
+    //   statik_state: unit_states, kernel_state
+    //   statik_logs: deltas, errors, actions
     console.log('[migration] Creating v1 schema');
   }
   

@@ -59,3 +59,23 @@ setInterval(async () => {
   await pruneOldSnapshots(keepLast=5);
 }, 30 * 60 * 1000); // 30 minutes
 ```
+
+---
+
+### Distribution via Mesh
+
+sfti.iso is the primary distribution format for new instances:
+
+1. **Peer-to-peer distribution:** Existing instances share sfti.iso via WebRTC data channels (mesh.u)
+2. **Chunked transfer:** ISO files are split into 64KB chunks for reliable transfer (see P2P.md)
+3. **Integrity verification:** SHA-256 hash verified after transfer, before extraction
+4. **Progressive loading:** For large ISOs, source files extract first (boot capability), state loads second
+
+### ISO Contents (Updated)
+
+The ISO now includes:
+- `source`: All source files including new units (deploy.u, dns.u) and inference.worker.js
+- `models`: On-device ML model files (optional, can be synced separately)
+- `state`: memories, patterns, skills, unit_states, kernel_state
+- `config`: All configurations including nlp-patterns-default.json
+- `file-manifest.json`: Complete file listing with integrity hashes

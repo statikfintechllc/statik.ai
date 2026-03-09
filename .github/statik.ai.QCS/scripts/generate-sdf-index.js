@@ -2,7 +2,7 @@
 // ──────────────────────────────────────────────────────────────────────────────
 // statik.ai.QCS — SOTA SDF Index Generator v2.0
 // ──────────────────────────────────────────────────────────────────────────────
-// Deep-analysed from all 22 SDF.RETYE.AF.master documents.
+// Deep-analysed from all 25 SDF.RETYE.AF.master documents.
 // Every file path, every governing doc, every cross-reference — verified.
 //
 // Usage:  node generate-sdf-index.js
@@ -20,14 +20,15 @@ const SDF_ROOT   = path.join(REPO_ROOT, 'docs', 'SDF.RETYE.AF.master');
 const INDEX_OUT  = path.join(REPO_ROOT, 'docs', 'sdf-index.yaml');
 const OVERRIDES  = path.join(REPO_ROOT, 'docs', 'sdf-index.overrides.yaml');
 
-// ── All 22 SDF Documents ───────────────────────────────────────────────────
+// ── All 25 SDF Documents ───────────────────────────────────────────────────
 const SDF_DOCS = [
   'STRUCTURE.md',   'BOOT.md',        'Root.Boot.md',   'Kernels.md',
   'Bus.RunTime.md', 'Adapters.md',    'API.md',         'Assets.md',
   'Config.Schema.md','Workers.md',    'Protocols.md',   'MESSAGES.md',
   'STORAGE.md',     'Storage.VFS.md', 'Units.md',       'Utils.md',
   'UI.md',          'Tests.md',       'ISO.md',         'ignore.IPA.md',
-  'iOS.md',         'README.md',
+  'iOS.md',         'README.md',      'SelfHost.md',    'P2P.md',
+  'Security.md',
 ];
 
 // ── Document Metadata ──────────────────────────────────────────────────────
@@ -57,10 +58,16 @@ const DOC_META = {
   'ISO.md':          { type: 'advisory', scope: 'sfti.iso snapshot format — JSON structure, triggers, retention, restore' },
   'ignore.IPA.md':   { type: 'advisory', scope: 'sfti.ipa — declared infeasible, PWA-first recommendation' },
   'iOS.md':          { type: 'cross',    scope: 'iOS integration: PWA capabilities, storage, push, hardware, performance, debugging' },
+  'SelfHost.md':     { type: 'primary',  scope: 'Self-hosting via SW + VFS + mesh, bootstrap distribution, domain/proxy creation, deploy.u, dns.u',
+                       title: 'Self-Hosting Architecture', category: 'infrastructure', priority: 'critical' },
+  'P2P.md':          { type: 'primary',  scope: 'WebRTC signaling, peer discovery, NAT traversal, data channel protocol, sync protocol, mesh security',
+                       title: 'P2P Networking Architecture', category: 'infrastructure', priority: 'critical' },
+  'Security.md':     { type: 'primary',  scope: 'Consolidated security: threat model, peer auth, encryption, CSP, code signing, rate limiting, audit logging',
+                       title: 'Security Model', category: 'infrastructure', priority: 'high' },
 };
 
 // ── COMPLETE FILE → SDF DOCUMENT MAPPING ───────────────────────────────────
-// Derived from exhaustive line-by-line reading of all 22 docs.
+// Derived from exhaustive line-by-line reading of all 25 docs.
 // Each entry: { path, primary, secondary[], layer, description }
 //
 // "primary"   = the SDF doc that DEFINES this file's spec
@@ -141,12 +148,15 @@ const FILE_MAPPINGS = [
   { path: 'src/units/bridge.u.js',    primary: 'Units.md', secondary: [],                                         layer: 'units',      description: 'Debug Bridge' },
   { path: 'src/units/disc.u.js',      primary: 'Units.md', secondary: [],                                         layer: 'units',      description: 'Discovery' },
   { path: 'src/units/mesh.u.js',      primary: 'Units.md', secondary: [],                                         layer: 'units',      description: 'P2P Mesh' },
+  { path: 'src/units/deploy.u.js',    primary: 'SelfHost.md', secondary: ['Units.md'],                            layer: 'units',      description: 'Deployment orchestration for self-hosting' },
+  { path: 'src/units/dns.u.js',       primary: 'SelfHost.md', secondary: ['Units.md'],                            layer: 'units',      description: 'DNS management for self-hosted domains' },
 
   // ═══════════════ WORKERS (4 Web Workers) ═════════════════════════════════
   { path: 'src/workers/cognition.worker.js', primary: 'Workers.md', secondary: [],                                layer: 'workers',    description: 'Heavy compute: pattern matching, TF-IDF cosine similarity' },
   { path: 'src/workers/memory.worker.js',    primary: 'Workers.md', secondary: ['STORAGE.md'],                    layer: 'workers',    description: 'DB operations: store, retrieve, delete, bulk — IndexedDB' },
   { path: 'src/workers/nlp.worker.js',       primary: 'Workers.md', secondary: [],                                layer: 'workers',    description: 'Language: tokenize, POS tag, entity extraction, sentiment' },
   { path: 'src/workers/compute.worker.js',   primary: 'Workers.md', secondary: [],                                layer: 'workers',    description: 'Math & crypto: SHA-256, AES, vector math, statistics' },
+  { path: 'src/workers/inference.worker.js', primary: 'Workers.md', secondary: [],                                layer: 'workers',    description: 'Inference worker for model execution' },
 
   // ═══════════════ ADAPTERS — iOS (4) ═════════════════════════════════════
   { path: 'src/adapters/ios/hardware.adapter.js',    primary: 'Adapters.md', secondary: ['iOS.md'],               layer: 'adapters',   description: 'iOS hardware: camera, sensors, haptics, geo, battery' },
@@ -246,23 +256,34 @@ const FILE_MAPPINGS = [
 
 // ── KNOWN CONTRADICTIONS (discovered during deep analysis) ─────────────────
 const KNOWN_ISSUES = [
-  { severity: 'high',   docs: ['BOOT.md','Root.Boot.md'],          issue: 'Entry point conflict: Root.Boot.md says index.html imports kernel.u.js; BOOT.md says bootstrap/boot.js' },
-  { severity: 'high',   docs: ['Units.md','MESSAGES.md'],          issue: 'NLP topics differ: Units.md=intent.parse/intent.parsed; MESSAGES.md=nlp.parse/ui.render' },
-  { severity: 'high',   docs: ['Units.md','MESSAGES.md'],          issue: 'CM subs differ: Units.md=memory.store/retrieve; MESSAGES.md=context.temporal' },
-  { severity: 'high',   docs: ['Units.md','MESSAGES.md'],          issue: 'DBT subs differ: Units.md=pattern.result/skill.result; MESSAGES.md=error.detected/success.confirmed' },
-  { severity: 'high',   docs: ['Units.md','MESSAGES.md'],          issue: 'EE subs differ: Units.md=action.executed/prediction.made; MESSAGES.md=action.execute/action.completed' },
-  { severity: 'medium', docs: ['Kernels.md','BOOT.md'],            issue: 'Kernel "never throws" contradicted by throw in BOOT.md catch block' },
-  { severity: 'medium', docs: ['Kernels.md','BOOT.md'],            issue: 'Lifecycle method: Kernels.md=initializeUnits(); BOOT.md=start()' },
-  { severity: 'medium', docs: ['BOOT.md','Bus.RunTime.md'],        issue: 'Validator sig: BOOT.md=validate(topic,payload); Bus.RunTime.md=validate(message,schemaName)' },
-  { severity: 'medium', docs: ['Config.Schema.md','API.md'],       issue: 'Action types: Config.Schema.md=underscore; API.md=dot notation + extra eval.code' },
-  { severity: 'medium', docs: ['STORAGE.md','Storage.VFS.md'],     issue: 'Migration v1 scope: STORAGE.md=3 stores; Storage.VFS.md=2 stores' },
-  { severity: 'medium', docs: ['STORAGE.md','Storage.VFS.md'],     issue: 'Snapshot name: STORAGE.md=statik-YYYYMMDD; Storage.VFS.md=sfti.iso' },
-  { severity: 'low',    docs: ['README.md'],                       issue: 'Unit count: heading says 17, table lists 19, Features says 19' },
-  { severity: 'low',    docs: ['STRUCTURE.md','README.md'],        issue: 'deploy.u.js and dns.u.js in memories but absent from all SDF docs' },
-  { severity: 'low',    docs: ['BOOT.md'],                         issue: 'Watchdog.failures Map used but never initialized in constructor' },
-  { severity: 'low',    docs: ['Utils.md','STORAGE.md'],           issue: 'crypto.js scope: Utils.md=randomBytes/Int; STORAGE.md adds encrypt/decrypt' },
-  { severity: 'low',    docs: ['Workers.md'],                      issue: 'Meta-text left: "Token check: ~4000 tokens. Continue..."' },
-  { severity: 'low',    docs: ['Bus.RunTime.md'],                  issue: 'Meta-text left: "Token check: Continue?"' },
+  // ── Original issues (H1-H5, M1-M6, L1-L6) — all resolved ────────────────
+  { id: 'H1', severity: 'high',   status: 'resolved', docs: ['BOOT.md','Root.Boot.md'],          issue: 'Entry point conflict: Root.Boot.md says index.html imports kernel.u.js; BOOT.md says bootstrap/boot.js' },
+  { id: 'H2', severity: 'high',   status: 'resolved', docs: ['Units.md','MESSAGES.md'],          issue: 'NLP topics differ: Units.md=intent.parse/intent.parsed; MESSAGES.md=nlp.parse/ui.render' },
+  { id: 'H3', severity: 'high',   status: 'resolved', docs: ['Units.md','MESSAGES.md'],          issue: 'CM subs differ: Units.md=memory.store/retrieve; MESSAGES.md=context.temporal' },
+  { id: 'H4', severity: 'high',   status: 'resolved', docs: ['Units.md','MESSAGES.md'],          issue: 'DBT subs differ: Units.md=pattern.result/skill.result; MESSAGES.md=error.detected/success.confirmed' },
+  { id: 'H5', severity: 'high',   status: 'resolved', docs: ['Units.md','MESSAGES.md'],          issue: 'EE subs differ: Units.md=action.executed/prediction.made; MESSAGES.md=action.execute/action.completed' },
+  { id: 'M1', severity: 'medium', status: 'resolved', docs: ['Kernels.md','BOOT.md'],            issue: 'Kernel "never throws" contradicted by throw in BOOT.md catch block' },
+  { id: 'M2', severity: 'medium', status: 'resolved', docs: ['Kernels.md','BOOT.md'],            issue: 'Lifecycle method: Kernels.md=initializeUnits(); BOOT.md=start()' },
+  { id: 'M3', severity: 'medium', status: 'resolved', docs: ['BOOT.md','Bus.RunTime.md'],        issue: 'Validator sig: BOOT.md=validate(topic,payload); Bus.RunTime.md=validate(message,schemaName)' },
+  { id: 'M4', severity: 'medium', status: 'resolved', docs: ['Config.Schema.md','API.md'],       issue: 'Action types: Config.Schema.md=underscore; API.md=dot notation + extra eval.code' },
+  { id: 'M5', severity: 'medium', status: 'resolved', docs: ['STORAGE.md','Storage.VFS.md'],     issue: 'Migration v1 scope: STORAGE.md=3 stores; Storage.VFS.md=2 stores' },
+  { id: 'M6', severity: 'medium', status: 'resolved', docs: ['STORAGE.md','Storage.VFS.md'],     issue: 'Snapshot name: STORAGE.md=statik-YYYYMMDD; Storage.VFS.md=sfti.iso' },
+  { id: 'L1', severity: 'low',    status: 'resolved', docs: ['README.md'],                       issue: 'Unit count: heading says 17, table lists 19, Features says 19' },
+  { id: 'L2', severity: 'low',    status: 'resolved', docs: ['STRUCTURE.md','README.md'],        issue: 'deploy.u.js and dns.u.js now defined in SelfHost.md and Units.md' },
+  { id: 'L3', severity: 'low',    status: 'resolved', docs: ['BOOT.md'],                         issue: 'Watchdog.failures Map used but never initialized in constructor' },
+  { id: 'L4', severity: 'low',    status: 'resolved', docs: ['Utils.md','STORAGE.md'],           issue: 'crypto.js scope: Utils.md=randomBytes/Int; STORAGE.md adds encrypt/decrypt' },
+  { id: 'L5', severity: 'low',    status: 'resolved', docs: ['Workers.md'],                      issue: 'Meta-text left: "Token check: ~4000 tokens. Continue..."' },
+  { id: 'L6', severity: 'low',    status: 'resolved', docs: ['Bus.RunTime.md'],                  issue: 'Meta-text left: "Token check: Continue?"' },
+
+  // ── Audit issues (A1-A8) — discovered and resolved during SDF audit ──────
+  { id: 'A1', severity: 'medium', status: 'resolved', description: 'MESSAGES.md:589 direct call cm.retrieveMemories() violated zero-coupling. Fixed to bus.request().', files: ['MESSAGES.md'] },
+  { id: 'A2', severity: 'medium', status: 'resolved', description: 'nlp.u missing context.temporal subscription in MESSAGES.md flow. Added to Units.md.', files: ['Units.md', 'MESSAGES.md'] },
+  { id: 'A3', severity: 'medium', status: 'resolved', description: 'ie.u emitted action.executed (Units.md) vs action.completed (MESSAGES.md). Standardized to action.completed.', files: ['Units.md', 'MESSAGES.md'] },
+  { id: 'A4', severity: 'low',    status: 'resolved', description: 'configs/nlp-patterns-default.json missing from STRUCTURE.md. Added.', files: ['STRUCTURE.md', 'MESSAGES.md'] },
+  { id: 'A5', severity: 'low',    status: 'resolved', description: 'Config.Schema.md ios_version was "18.3", target is 26.3. Fixed.', files: ['Config.Schema.md'] },
+  { id: 'A6', severity: 'low',    status: 'resolved', description: 'API.md cross-refs used underscores instead of dots. Fixed.', files: ['API.md'] },
+  { id: 'A7', severity: 'low',    status: 'resolved', description: 'STORAGE.md VFS fetch("/file-manifest.json") assumed server. Changed to load from OPFS/VFS.', files: ['STORAGE.md'] },
+  { id: 'A8', severity: 'low',    status: 'resolved', description: 'Root.Boot.md validation claim checked - no false claim found in actual file.', files: ['Root.Boot.md'] },
 ];
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -414,7 +435,14 @@ function generate() {
 
   // Known issues
   for (const issue of KNOWN_ISSUES) {
-    index.known_issues.push({ severity: issue.severity, docs: issue.docs, issue: issue.issue });
+    const entry = {
+      id: issue.id,
+      severity: issue.severity,
+      status: issue.status || 'open',
+      docs: issue.docs || issue.files || [],
+      issue: issue.issue || issue.description,
+    };
+    index.known_issues.push(entry);
   }
 
   // Write
@@ -446,7 +474,8 @@ function generate() {
   const h = KNOWN_ISSUES.filter(i => i.severity === 'high').length;
   const m = KNOWN_ISSUES.filter(i => i.severity === 'medium').length;
   const l = KNOWN_ISSUES.filter(i => i.severity === 'low').length;
-  console.log(`    Issues: ${h} high · ${m} medium · ${l} low\n`);
+  const resolved = KNOWN_ISSUES.filter(i => i.status === 'resolved').length;
+  console.log(`    Issues: ${h} high · ${m} medium · ${l} low (${resolved}/${KNOWN_ISSUES.length} resolved)\n`);
 }
 
 // Exports for testing
